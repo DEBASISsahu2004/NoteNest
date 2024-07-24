@@ -1,0 +1,12 @@
+[
+    {
+        "title": "Home",
+        "icon": "carbon:home",
+        "path": "/notes"
+    },
+    {
+        "title": "Add Notes",
+        "icon": "ic:round-add",
+        "path": "/notes"
+    }
+]

@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+    h2{
+        font-size: var(--fs-greet);
+        font-weight: var(--fw-normal) !important;
+
+        span{
+            font-size: var(--fs-greet);
+            font-weight: var(--fw-bold);
+        }
+    }
+
+    p{
+        color: #4d4d4d;
+        line-height: 30px;
+        font-size: var(--fs-md);
+    }
+}

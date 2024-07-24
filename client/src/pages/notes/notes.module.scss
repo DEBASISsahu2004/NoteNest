@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding-top: 60px;
+    flex-direction: column;
+
+    main{
+        margin-top: 50px;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}

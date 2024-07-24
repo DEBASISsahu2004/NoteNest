@@ -1,0 +1,23 @@
+.button{
+    display: flex;
+    width: 320px;
+    color: var(--white);
+    cursor: pointer;
+    margin: 20px 0 40px 0;
+    padding: 16px 20px;
+    border-radius: 8px;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    background-color: #f7685c;
+
+    svg{
+        width: 24px;
+        height: 24px;
+    }
+
+    h3{
+        font-size: var(--fs-lg);
+        font-weight: var(--fw-bold);
+    }
+}

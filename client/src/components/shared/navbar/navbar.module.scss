@@ -1,0 +1,42 @@
+.header{
+    display: grid;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto 60px;
+    padding: 30px 6rem 10px 6rem;
+    gap: 20px;
+
+    .search-bar{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-items: center;
+
+        .field{
+            width: 100%;
+
+            input{
+                border-radius: 15px;
+                border: none;
+                padding: 8px 10px;
+                font-size: var(--fs-lg);
+                background-color: rgb(210, 255, 255);
+            }
+        }
+
+        svg{
+            margin-right: 14px;
+            width: 24px;
+            height: 24px;
+            color: var(--light-grey);
+        }
+    }
+
+    .theme{
+        svg{
+            width: 35px;
+            height: 35px;
+        }
+    }
+}

@@ -1,0 +1,93 @@
+.navContainer {
+  width: 90%;
+  margin: 6em auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navContainer .logoContainer {
+  display: flex;
+  align-items: center;
+  gap: clamp(1em, 4vw, 10em);
+}
+
+.navContainer .logoContainer .logo {
+  width: clamp(8em, 4vw, 20em);
+}
+
+.navContainer .authContainer {
+  display: flex;
+  align-items: center;
+  gap: clamp(1em, 4vw, 4em);
+}
+
+.navContainer .aboutButton,
+.navContainer .authButton {
+  background: none;
+  border: 1px solid var(--text);
+  color: inherit;
+  padding: 0.7em 1.7em;
+  cursor: pointer;
+  font-size: clamp(3em, 1vw, 4.5em);
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.navContainer .aboutButton:hover,
+.navContainer .authButton:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+.navContainer .svgButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+}
+
+.navContainer .greeting {
+  font-size: clamp(4em, 2vw, 8em);
+  font-weight: 600;
+}
+
+.navContainer .avatarButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+}
+
+.navContainer .avatarButton img {
+  width: 3em;
+  aspect-ratio: 1/1;
+}
+
+.navContainer .menu {
+  display: none;
+}
+
+hr {
+  border: 1px solid #666;
+}
+
+@media (max-width: 768px) {
+  .navContainer .authButton {
+    display: none;
+  }
+
+  .navContainer .aboutButton {
+    font-size: clamp(2.5em, 1vw, 4.5em);
+  }
+
+  .navContainer .avatarButton img {
+    width: 2.5em;
+  }
+
+  .navContainer .menu {
+    display: block;
+  }
+}

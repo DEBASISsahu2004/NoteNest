@@ -2,7 +2,7 @@ import styles from './brandname.module.css'
 
 const BrandName = () => {
   return (
-    <h1>NOTENEST</h1>
+    <p className={styles.brandNameLarge}>NOTENEST</p>
   )
 }
 

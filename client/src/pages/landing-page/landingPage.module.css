@@ -1,3 +1,6 @@
-/* body{
-    background-color: red;
-} */
+.brandName {
+  position: absolute;
+  bottom: -8%;
+  color: var(--text);
+  opacity: 15%;
+}

@@ -6,10 +6,7 @@ const LandingPage = () => {
   return (
     <>
       <Navbar />
-      <div className={styles.brandName} >
-        <BrandName />
-
-      </div>
+      <BrandName className={styles.brandName} />
     </>
   )
 }

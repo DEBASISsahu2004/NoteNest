@@ -1,93 +1,242 @@
 .navContainer {
-  width: 90%;
-  margin: 6em auto;
+  position: relative;
+  width: 100%;
+  padding: 20px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: padding 0.3s ease-in-out;
 }
 
-.navContainer .logoContainer {
+.navContainer .aboutContainer {
   display: flex;
   align-items: center;
-  gap: clamp(1em, 4vw, 10em);
+  gap: 40px;
+  transition: gap 0.3s ease-in-out;
 }
 
-.navContainer .logoContainer .logo {
-  width: clamp(8em, 4vw, 20em);
-}
-
-.navContainer .authContainer {
-  display: flex;
-  align-items: center;
-  gap: clamp(1em, 4vw, 4em);
-}
-
-.navContainer .aboutButton,
-.navContainer .authButton {
-  background: none;
-  border: 1px solid var(--text);
-  color: inherit;
-  padding: 0.7em 1.7em;
-  cursor: pointer;
-  font-size: clamp(3em, 1vw, 4.5em);
-  border-radius: 4px;
-  font-weight: 600;
+.navContainer .aboutContainer .logo {
+  width: 50px;
+  aspect-ratio: 1/1;
   transition: all 0.3s ease-in-out;
 }
 
-.navContainer .aboutButton:hover,
-.navContainer .authButton:hover {
-  background-color: var(--text);
-  color: var(--bg);
+.navContainer .aboutContainer .aboutDropdown {
+  position: relative;
 }
 
-.navContainer .svgButton {
-  background: none;
-  border: none;
-  cursor: pointer;
+.navContainer .aboutContainer .aboutButton,
+.navContainer .authButtonContainer .authButton {
+  background-color: transparent;
   color: var(--text);
-  display: flex;
+  border: 2px solid var(--text);
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  text-wrap: nowrap;
+  transition: all 0.3s ease-in-out;
 }
 
-.navContainer .greeting {
-  font-size: clamp(4em, 2vw, 8em);
+.navContainer .aboutContainer .aboutContent {
+  position: absolute;
+  top: 96%;
+  padding: 12px 16px;
+  background-color: var(--secondary);
+  border: 2px solid var(--text);
+  border-radius: 0 8px 8px 8px;
+  line-height: 1.5;
+  width: 400px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navContainer .aboutContainer .aboutContent p {
+  font-size: 13px;
+}
+
+.navContainer .aboutContainer .aboutContent p span {
+  font-size: 15px;
   font-weight: 600;
 }
 
-.navContainer .avatarButton {
-  background: none;
-  border: none;
-  cursor: pointer;
+.navContainer .authButtonContainer {
+  position: relative;
   display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: gap 0.3s ease-in-out;
 }
 
-.navContainer .avatarButton img {
-  width: 3em;
+.navContainer .authButtonContainer .authButton:hover {
+  background-color: var(--secondary);
+}
+
+.navContainer .authButtonContainer .themeButton,
+.navContainer .authButtonContainer .menuButton {
+  position: relative;
+  background-color: transparent;
+  display: inline-flex;
+  color: var(--text);
+  width: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navContainer .authButtonContainer .avatarButton {
+  background-color: transparent;
+  display: inline-flex;
+}
+
+.navContainer .authButtonContainer .avatarButton img {
+  width: 36px;
   aspect-ratio: 1/1;
+  object-fit: contain;
 }
 
-.navContainer .menu {
+.navContainer .authButtonContainer .menuDropdown {
+  position: absolute;
+  top: 100%;
+  right: -50%;
+  padding: 12px 16px;
+  background-color: var(--secondary);
+  border: 2px solid var(--text);
+  border-radius: 8px;
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-hr {
-  border: 1px solid #666;
+.navContainer .authButtonContainer .menuContainer {
+  display: none;
+  position: relative;
+}
+
+.navContainer .authButtonContainer .menuDropdown .menuItem {
+  color: var(--text);
+  gap: 10px;
+  text-wrap: nowrap;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navContainer .authButtonContainer .menuDropdown .menuItem:hover,
+.navContainer .authButtonContainer .themeButton:hover,
+.navContainer .authButtonContainer .menuButton:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
-  .navContainer .authButton {
+  .navContainer {
+    padding: 20px 40px;
+  }
+
+  .navContainer .aboutContainer {
+    gap: 20px;
+  }
+
+  .navContainer .aboutContainer .logo {
+    width: 40px;
+  }
+
+  .navContainer .aboutContainer .aboutButton,
+  .navContainer .authButtonContainer .authButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .navContainer .aboutContainer .aboutContent p {
+    font-size: 12px;
+  }
+
+  .navContainer .aboutContainer .aboutContent p span {
+    font-size: 13px;
+  }
+
+  .navContainer .aboutContainer .aboutContent {
+    width: 300px;
+  }
+
+  .navContainer .authButtonContainer .themeButton,
+  .navContainer .authButtonContainer .menuButton {
+    width: 20px;
+  }
+
+  .navContainer .authButtonContainer .avatarButton img {
+    width: 30px;
+  }
+}
+
+@media (max-width: 540px) {
+  .navContainer .authButtonContainer .authButton {
     display: none;
   }
 
-  .navContainer .aboutButton {
-    font-size: clamp(2.5em, 1vw, 4.5em);
+  .navContainer .authButtonContainer .menuContainer {
+    display: inline-flex;
   }
 
-  .navContainer .avatarButton img {
-    width: 2.5em;
+  .navContainer .authButtonContainer .menuDropdown .menuItem {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navContainer {
+    padding: 12px 20px;
   }
 
-  .navContainer .menu {
-    display: block;
+  .navContainer .aboutContainer .logo {
+    width: 36px;
+  }
+
+  .navContainer .aboutContainer .aboutButton {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .navContainer .aboutContainer .aboutContent {
+    padding: 8px 12px;
+  }
+
+  .navContainer .aboutContainer .aboutContent p {
+    font-size: 10px;
+  }
+
+  .navContainer .aboutContainer .aboutContent p span {
+    font-size: 11px;
+  }
+
+  .navContainer .aboutContainer .aboutContent {
+    width: 280px;
+  }
+}
+
+@media (max-width: 380px) {
+  .navContainer .aboutContainer .aboutButton {
+    font-size: 10px;
+  }
+
+  .navContainer .aboutContainer .aboutContent p {
+    font-size: 8px;
+  }
+
+  .navContainer .aboutContainer .aboutContent p span {
+    font-size: 9px;
+  }
+
+  .navContainer .aboutContainer .aboutContent {
+    width: 220px;
+  }
+
+  .navContainer .authButtonContainer .menuDropdown .menuItem {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 340px) {
+  .navContainer .aboutContainer .aboutContent {
+    width: 180px;
   }
 }

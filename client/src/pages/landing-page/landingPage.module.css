@@ -1,6 +1,57 @@
-.brandName {
-  position: absolute;
-  bottom: -8%;
-  color: var(--text);
-  opacity: 15%;
+.brandName{
+    position: absolute;
+    bottom: 0;
+}
+
+.landingPageContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 80%;
+    margin: 0 auto;
+    gap: clamp(2em, 4vw, 5em);
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.landingPageContent .headingContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.landingPageContent h1{
+    font-size: clamp(8em, 4vw, 20em);
+    line-height: 1;
+}
+
+.landingPageContent h1 span{
+    color: var(--primary);
+}
+
+.landingPageContent p{
+    text-align: center;
+    font-size: clamp(2em, 4vw, 5em);
+    color: #666;
+}
+
+.landingPageContent button{
+    padding: 1em clamp(4em, 4vw, 8em);
+    font-size: clamp(2.8em, 2vw, 4em);
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary);
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.3s ease-in-out;
+}
+
+.landingPageContent button:hover{
+    transform: scale(1.05);
 }

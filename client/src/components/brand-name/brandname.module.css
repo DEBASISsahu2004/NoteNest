@@ -1,6 +1,9 @@
 .brandNameLarge{
-    font-size: clamp(10em, 28vw, 80em);
+    font-size: clamp(8em, 20.7vw, 133em);
     font-family: 'Agbalumo', sans-serif;
-    line-height: 1;
+    line-height: 0.65;
     user-select: none;
+    color: var(--text);
+    opacity: 15%;
+    z-index: -1;
 }

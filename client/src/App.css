@@ -1,25 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-:root{
-  --blue: #1E90FF;
-  --orange: #FF5722;
+:root {
+  --primary: var(--dark-primary);
+  --secondary: var(--dark-secondary);
+
+  --dark-primary: #1e90ff;
+  --light-primary: #ff5722;
+  --dark-secondary: #1a1919;
+  --light-secondary: #E2E2E2;
+
   --bg: #000;
   --text: #fff;
-  --secondary-bg: #0D0D0D;
 }
 
-*{
-  font-family: 'Poppins', sans-serif;
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+body {
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
   background-color: var(--bg);
   color: var(--text);
-  font-size: 4px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
 }

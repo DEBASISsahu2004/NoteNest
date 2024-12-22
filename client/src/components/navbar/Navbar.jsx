@@ -9,7 +9,6 @@ import Avatar1 from '../../assets/images/avatars/avatar1.svg';
 const Navbar = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
-  // const isLoggedIn = true;
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const handleToggleTheme = () => {

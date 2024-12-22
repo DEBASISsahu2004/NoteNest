@@ -9,13 +9,13 @@ function App() {
   if (theme === 'dark') {
     document.documentElement.style.setProperty('--bg', '#000')
     document.documentElement.style.setProperty('--text', '#fff')
-    document.documentElement.style.setProperty('--primary', 'var(--dark-primary)')
-    document.documentElement.style.setProperty('--secondary', 'var(--dark-secondary)')
+    document.documentElement.style.setProperty('--primary', 'rgba(var(--dark-primary)))')
+    document.documentElement.style.setProperty('--secondary', 'rgba(var(--light-secondary)))')
   } else {
     document.documentElement.style.setProperty('--bg', '#fff')
     document.documentElement.style.setProperty('--text', '#000')
-    document.documentElement.style.setProperty('--primary', 'var(--light-primary)')
-    document.documentElement.style.setProperty('--secondary', 'var(--light-secondary)')
+    document.documentElement.style.setProperty('--primary', 'rgba(var(--light-primary)))')
+    document.documentElement.style.setProperty('--secondary', 'rgba(var(--dark-secondary)))')
   }
 
   return (

@@ -21,7 +21,7 @@ const Navbar = () => {
     if (aboutContent && aboutButton) {
       aboutContent.style.display = 'flex';
       aboutButton.style.borderRadius = '8px 8px 0 0';
-      aboutButton.style.backgroundColor = 'var(--secondary)';
+      aboutButton.style.backgroundColor = 'rgba(var(--secondary))';
     }
   };
 

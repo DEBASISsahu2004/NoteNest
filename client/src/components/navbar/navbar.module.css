@@ -214,7 +214,7 @@
 }
 
 @media (max-width: 380px) {
-  .navContainer .aboutContainer .aboutButton {
+  /* .navContainer .aboutContainer .aboutButton {
     font-size: 10px;
   }
 
@@ -224,7 +224,7 @@
 
   .navContainer .aboutContainer .aboutContent p span {
     font-size: 10px;
-  }
+  } */
 
   .navContainer .aboutContainer .aboutContent {
     width: 220px;

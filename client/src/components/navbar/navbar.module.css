@@ -66,6 +66,7 @@
   transition: gap 0.3s ease-in-out;
 }
 
+.navContainer .aboutContainer .aboutButton:hover,
 .navContainer .authButtonContainer .authButton:hover {
   background-color: rgba(var(--secondary));
 }

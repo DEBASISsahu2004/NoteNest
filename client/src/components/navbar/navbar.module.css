@@ -49,15 +49,11 @@
   width: 400px;
   display: none;
   flex-direction: column;
+  font-size: 15px;
   gap: 10px;
 }
 
-.navContainer .aboutContainer .aboutContent p {
-  font-size: 13px;
-}
-
 .navContainer .aboutContainer .aboutContent p span {
-  font-size: 15px;
   font-weight: 600;
 }
 
@@ -146,16 +142,9 @@
     font-size: 14px;
   }
 
-  .navContainer .aboutContainer .aboutContent p {
-    font-size: 12px;
-  }
-
-  .navContainer .aboutContainer .aboutContent p span {
-    font-size: 13px;
-  }
-
   .navContainer .aboutContainer .aboutContent {
     width: 300px;
+    font-size: 13px;
   }
 
   .navContainer .authButtonContainer .themeButton,
@@ -198,34 +187,12 @@
 
   .navContainer .aboutContainer .aboutContent {
     padding: 8px 12px;
-  }
-
-  .navContainer .aboutContainer .aboutContent p {
-    font-size: 11px;
-  }
-
-  .navContainer .aboutContainer .aboutContent p span {
-    font-size: 12px;
-  }
-
-  .navContainer .aboutContainer .aboutContent {
     width: 280px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 380px) {
-  /* .navContainer .aboutContainer .aboutButton {
-    font-size: 10px;
-  }
-
-  .navContainer .aboutContainer .aboutContent p {
-    font-size: 9px;
-  }
-
-  .navContainer .aboutContainer .aboutContent p span {
-    font-size: 10px;
-  } */
-
   .navContainer .aboutContainer .aboutContent {
     width: 220px;
   }

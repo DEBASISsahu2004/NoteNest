@@ -97,3 +97,10 @@
         font-size: 12px;
     }
 }
+
+@media (max-width: 375px) {
+    .LandingPage .description {
+      width: 350px;
+      font-size: 12px;
+    }
+}

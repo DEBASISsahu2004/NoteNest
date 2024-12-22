@@ -194,7 +194,7 @@
 
 @media (max-width: 380px) {
   .navContainer .aboutContainer .aboutContent {
-    width: 220px;
+    width: 240px;
   }
 
   .navContainer .authButtonContainer .menuDropdown .menuItem {
@@ -202,8 +202,8 @@
   }
 }
 
-@media (max-width: 340px) {
+/* @media (max-width: 340px) {
   .navContainer .aboutContainer .aboutContent {
     width: 180px;
   }
-}
+} */

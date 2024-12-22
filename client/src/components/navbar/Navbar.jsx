@@ -51,7 +51,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className={styles.navContainer}>
+      <nav className={styles.navContainer}>
 
         <div className={styles.aboutContainer}>
           <img className={styles.logo} src={theme === 'dark' ? Logodark : Logolight} alt="logo" />
@@ -101,8 +101,7 @@ const Navbar = () => {
           )}
         </div>
 
-      </div>
-      <hr />
+      </nav>
     </>
   );
 };

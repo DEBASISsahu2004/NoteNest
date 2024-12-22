@@ -9,3 +9,9 @@
     opacity: 15%;
     z-index: -1;
 }
+
+@media (max-width: 475px) {
+    .brandNameLarge {
+        line-height: 0.8;
+    }
+}

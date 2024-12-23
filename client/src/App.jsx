@@ -1,5 +1,7 @@
 import './App.css'
 import LandingPage from './pages/landing-page/LandingPage'
+import Login from './pages/Account/login/Login'
+import SignUp from './pages/Account/signup/SignUp'
 import { useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -22,7 +24,9 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/' element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
     </>

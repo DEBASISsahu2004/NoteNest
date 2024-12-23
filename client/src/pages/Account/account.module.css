@@ -96,20 +96,20 @@
   padding: 10px;
 }
 
-.formContainer .googleButton img{
-    position: absolute;
-    left: 2%;
-    width: 40px;
-    aspect-ratio: 1/1;
+.formContainer .googleButton img {
+  position: absolute;
+  left: 2%;
+  width: 40px;
+  aspect-ratio: 1/1;
 }
 
-.formContainer .formFooter{
-    color: var(--text);
-    font-size: 13px;
-    text-align: center;
+.formContainer .formFooter {
+  color: var(--text);
+  font-size: 13px;
+  text-align: center;
 }
 
-.formContainer .formFooter a{
-    color: var(--text);
-    text-decoration: underline;
+.formContainer .formFooter a {
+  color: var(--text);
+  text-decoration: underline;
 }

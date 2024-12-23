@@ -6,7 +6,7 @@ const LandingPage = () => {
   const handleClick = () => {
     window.location.href = '/login'
   }
-  
+
   return (
     <div className={styles.LandingPage}>
       <Navbar />

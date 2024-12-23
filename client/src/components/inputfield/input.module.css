@@ -1,41 +1,47 @@
-.inputContainer{
-    display: flex;
-    flex-direction: column;
+.inputContainer {
+  display: flex;
+  flex-direction: column;
 }
 
-.inputContainer label{
-    font-size: 16px;
-    color: var(--text);
+.inputContainer label {
+  font-size: 16px;
+  color: var(--text);
 }
 
-.inputContainer .inputWrapper input{
-    width: 340px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 2px solid #666;
-    background-color: var(--bg);
-    color: var(--text);
-    font-size: 14px;
+.inputContainer .inputWrapper input {
+  width: 340px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid #666;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 14px;
 }
 
-.inputContainer .inputWrapper input:focus{
-    border: 2px solid var(--text);
+.inputContainer .inputWrapper input:focus {
+  border: 2px solid var(--text);
 }
 
-.inputContainer .inputWrapper{
-    position: relative;
+.inputContainer .inputWrapper {
+  position: relative;
 }
 
-.inputContainer .inputWrapper .toggleButton{
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    display: inline-flex;
-    background: none;
-    color: #666;
+.inputContainer .inputWrapper .toggleButton {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  background: none;
+  color: #666;
 }
 
-.inputContainer .inputWrapper .toggleButton:hover{
-    color: var(--text);
+.inputContainer .inputWrapper .toggleButton:hover {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .inputContainer .inputWrapper input {
+    width: 260px;
+  }
 }

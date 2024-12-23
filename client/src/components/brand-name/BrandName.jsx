@@ -1,7 +1,7 @@
 import styles from './brandname.module.css'
 import PropTypes from 'prop-types';
 
-const BrandName = ({className}) => {
+const BrandName = ({ className }) => {
   return (
     <p className={`${styles.brandNameLarge} ${className}`}>NOTENEST</p>
   )

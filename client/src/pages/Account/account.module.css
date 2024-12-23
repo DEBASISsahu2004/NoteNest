@@ -113,3 +113,34 @@
   color: var(--text);
   text-decoration: underline;
 }
+
+@media (max-width: 600px) {
+  .formContainer {
+    padding: 16px 24px;
+    gap: 16px;
+  }
+
+  .formContainer .formName h1 {
+    font-size: 20px;
+  }
+
+  .formContainer .formName img {
+    width: 34px;
+  }
+
+  .formContainer form {
+    gap: 6px;
+  }
+
+  .formContainer form .formSubmitButton {
+    font-size: 14px;
+  }
+
+  .formContainer .googleButton {
+    font-size: 14px;
+  }
+
+  .formContainer .googleButton img {
+    width: 34px;
+  }
+}

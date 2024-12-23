@@ -40,8 +40,15 @@
   color: var(--text);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .inputContainer .inputWrapper input {
     width: 260px;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  .inputContainer label {
+    font-size: 14px;
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Eye, EyeClosed } from 'lucide-react';
 
-const Input = ({ label, inputType, type, placeholder }) => {
+const Input = ({ label, name, type, placeholder, value, onChange }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -12,13 +12,13 @@ const Input = ({ label, inputType, type, placeholder }) => {
 
     return (
         <div className={styles.inputContainer}>
-            <label htmlFor={inputType}>{label}</label>
+            <label htmlFor={name}>{label}</label>
             <div className={styles.inputWrapper}>
-                <input type={type === 'password' && showPassword ? 'text' : type} id={inputType} placeholder={placeholder} />
+                <input type={type === 'password' && showPassword ? 'text' : type} id={name} name={name} placeholder={placeholder} value={value} onChange={onChange} />
                 {type === 'password' && (
                     <button
                         type="button"
-                        onClick={() => togglePasswordVisibility()}
+                        onClick={togglePasswordVisibility}
                         className={styles.toggleButton}
                     >
                         {!showPassword ? <Eye /> : <EyeClosed />}
@@ -31,9 +31,11 @@ const Input = ({ label, inputType, type, placeholder }) => {
 
 Input.propTypes = {
     label: PropTypes.string.isRequired,
-    inputType: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired
+    placeholder: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    onChange: PropTypes.func
 }
 
 export default Input

@@ -37,19 +37,24 @@
   gap: 8px;
 }
 
-.formContainer form .passwordContainer {
+.formContainer form .passwordContainer, .formContainer form .otpContainer {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   width: fit-content;
 }
 
-.formContainer form .forgotPasswordButton {
+.formContainer form .forgotPasswordButton, .formContainer form .resetOtpButton {
   font-size: 12px;
   color: var(--text);
   background: none;
   text-decoration: underline;
   align-self: flex-end;
+  float: right;
+}
+
+.formContainer form .resetOtpButton{
+  text-decoration: none;
 }
 
 .formContainer form .formSubmitButton {
@@ -61,11 +66,17 @@
   font-size: 16px;
   font-weight: 600;
   margin-top: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.formContainer form .formSubmitButton:hover {
+  background-color: rgb(0, 83, 165);
 }
 
 .formContainer .separator {
   position: relative;
   text-align: center;
+  opacity: 0.8;
 }
 
 .formContainer .separator hr {
@@ -73,6 +84,8 @@
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
+  outline: none;
+  border: 1px solid;
   border-color: #666;
   z-index: -1;
 }
@@ -80,7 +93,7 @@
 .formContainer .separator span {
   background-color: var(--bg);
   padding: 0 10px;
-  color: var(--text);
+  color: #666;
 }
 
 .formContainer .googleButton {
@@ -94,6 +107,31 @@
   font-weight: 600;
   position: relative;
   padding: 10px;
+}
+
+.formContainer form .buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.formContainer form .buttonWrapper button {
+  width: 46%;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.formContainer form .buttonWrapper .backButton {
+  background-color: var(--bg);
+  border: 2px solid #666;
+  color: var(--text);
+}
+
+.formContainer form .buttonWrapper .backButton:hover {
+  background-color: #666;
 }
 
 .formContainer .googleButton img {

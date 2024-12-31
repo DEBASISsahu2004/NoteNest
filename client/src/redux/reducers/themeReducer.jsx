@@ -1,14 +1,18 @@
 const initialState = {
-    theme: 'dark',
+    theme: localStorage.getItem("theme") || 'dark',
 };
 
 const themeReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'TOGGLE_THEME':
-            return {
-                ...state,
-                theme: state.theme === 'light' ? 'dark' : 'light',
-            };
+            {
+                const newTheme = state.theme === 'light' ? 'dark' : 'light';
+                localStorage.setItem("theme", newTheme);
+                return {
+                    ...state,
+                    theme: newTheme,
+                };
+            }
         default:
             return state;
     }

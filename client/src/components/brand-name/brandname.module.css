@@ -1,0 +1,17 @@
+.brandNameLarge {
+  position: relative;
+  left: -0.3%;
+  font-size: clamp(1em, 21.2vw, 133em);
+  font-family: "Agbalumo", sans-serif;
+  line-height: 0.65;
+  user-select: none;
+  color: var(--text);
+  opacity: 15%;
+  z-index: -1;
+}
+
+@media (max-width: 475px) {
+  .brandNameLarge {
+    line-height: 0.8;
+  }
+}

@@ -1,0 +1,5 @@
+# Ignore the notemodule directory
+node_modules/
+
+# Ignore environment files
+.env

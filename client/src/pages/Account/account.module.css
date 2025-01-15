@@ -1,0 +1,247 @@
+.formWrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.formWrapper .formContainer {
+  width: 380px;
+  height: fit-content;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 30px;
+  background-color: var(--bg);
+  border-radius: 6px;
+  border: 2px solid #666;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.formContainer .formHeading .formTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formContainer .formHeading h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.formContainer .formHeading img {
+  width: 40px;
+  aspect-ratio: 1/1;
+}
+
+.formContainer .formHeading .formSubtitle {
+  color: #666;
+  width: 90%;
+  font-size: 14px;
+}
+
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formContainer form .error {
+  color: red;
+  font-size: 12px;
+  text-align: start;
+}
+
+.formContainer form .otpFunctions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.formContainer form .otpFunctions button {
+  font-size: 12px;
+  color: var(--text);
+  background: none;
+}
+
+.formContainer form .credentialsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formContainer
+  form
+  .passwordContainer
+  .passwordFunctions
+  .forgotPasswordButton {
+  font-size: 12px;
+  color: var(--text);
+  background: none;
+  text-decoration: underline;
+  align-self: flex-end;
+  float: right;
+}
+
+.formContainer form .formSubmitButton {
+  margin-top: 14px;
+  padding: 10px;
+  background-color: rgb(var(--primary));
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  border: 2px solid rgb(var(--primary));
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.formContainer form .formSubmitButton:hover {
+  background-color: rgba(var(--primary), 0.3);
+  color: var(--text);
+  border: 2px solid rgb(var(--primary));
+}
+
+.formContainer form .formSubmitButton:active {
+  transform: scale(0.95);
+}
+
+.formContainer .separator {
+  position: relative;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.formContainer .separator hr {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  outline: none;
+  border: 1px solid;
+  border-color: #666;
+  z-index: -1;
+}
+
+.formContainer .separator span {
+  background-color: var(--bg);
+  padding: 0 10px;
+  color: #666;
+}
+
+.formContainer form .buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0 10px 0;
+}
+
+.formContainer form .buttonWrapper button {
+  width: 48%;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.formContainer form .buttonWrapper .backButton {
+  background-color: var(--bg);
+  border: 2px solid #666;
+  color: var(--text);
+  transition: all 0.3s ease-in-out;
+}
+
+.formContainer form .buttonWrapper .backButton:hover {
+  background-color: var(--text);
+  border: none;
+  color: var(--bg);
+}
+
+.formContainer .formFooter {
+  color: var(--text);
+  font-size: 13px;
+  text-align: center;
+}
+
+.formContainer .formFooter a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.themeButton {
+  position: absolute;
+  bottom: 40px;
+  right: 50px;
+  background-color: var(--bg);
+  display: inline-flex;
+  padding: 10px;
+  border-radius: 25px;
+  box-shadow: 0 0 2px var(--text);
+  transition: all 0.3s ease-in-out;
+}
+
+.themeButton img {
+  width: 24px;
+}
+
+.themeButton img.dark {
+  filter: invert(1);
+}
+
+.themeButton img.light {
+  filter: invert(0);
+}
+
+.themeButton:hover {
+  box-shadow: 0 0 6px var(--text);
+  transform: scale(1.05);
+}
+
+.themeButton:active {
+  transform: scale(0.95);
+}
+
+.brandName {
+  position: absolute;
+  bottom: 0;
+  left: -1.1%;
+}
+
+@media (max-width: 600px) {
+  .formWrapper .formContainer {
+    width: 300px;
+    padding: 16px 24px;
+    gap: 16px;
+  }
+
+  .formContainer .formHeading .formTitle h1 {
+    font-size: 20px;
+  }
+
+  .formContainer .formHeading .formSubtitle {
+    font-size: 13px;
+  }
+
+  .formContainer .formHeading img {
+    width: 34px;
+  }
+
+  .formContainer form {
+    gap: 6px;
+  }
+
+  .formContainer form .formSubmitButton {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .themeButton {
+    bottom: 20px;
+    right: 20px;
+  }
+}

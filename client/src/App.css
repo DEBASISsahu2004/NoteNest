@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+  --primary: rgba(var(--dark-primary));
+  --secondary: rgba(var(--dark-secondary));
+
+  --dark-primary: 30, 144, 255;
+  --light-primary: 255, 87, 34;
+  --dark-secondary: 26, 25, 25;
+  --light-secondary: 226, 226, 226;
+
+  --bg: #000;
+  --text: #ffffff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+input {
+  outline: none;
+  border: none;
+}

@@ -1,0 +1,29 @@
+.googleButton {
+  background-color: white;
+  border-radius: 6px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  padding: 10px;
+}
+
+.googleButton img {
+  position: absolute;
+  left: 2%;
+  width: 40px;
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 600px) {
+  .googleButton {
+    font-size: 14px;
+  }
+
+  .googleButton img {
+    width: 34px;
+  }
+}

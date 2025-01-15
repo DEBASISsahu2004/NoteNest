@@ -1,0 +1,204 @@
+.navContainer {
+  position: relative;
+  width: 100%;
+  padding: 20px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: padding 0.3s ease-in-out;
+  border-bottom: 2px solid var(--text);
+}
+
+.navContainer .aboutContainer {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  transition: gap 0.3s ease-in-out;
+}
+
+.navContainer .aboutContainer .logo {
+  width: 50px;
+  aspect-ratio: 1/1;
+  transition: all 0.3s ease-in-out;
+}
+
+.navContainer .aboutContainer .aboutDropdown {
+  position: relative;
+}
+
+.navContainer .aboutContainer .aboutButton,
+.navContainer .authButtonContainer .authButton {
+  background-color: transparent;
+  color: var(--text);
+  border: 2px solid var(--text);
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  text-wrap: nowrap;
+  transition: all 0.3s ease-in-out;
+}
+
+.navContainer .aboutContainer .aboutContent {
+  position: absolute;
+  top: 96%;
+  padding: 12px 16px;
+  background-color: rgb(var(--secondary));
+  border: 2px solid var(--text);
+  border-radius: 0 8px 8px 8px;
+  line-height: 1.5;
+  width: 400px;
+  display: none;
+  flex-direction: column;
+  font-size: 15px;
+  gap: 10px;
+}
+
+.navContainer .aboutContainer .aboutContent p span {
+  font-weight: 600;
+}
+
+.navContainer .authButtonContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: gap 0.3s ease-in-out;
+}
+
+.navContainer .authButtonContainer .authButton:hover {
+  background-color: rgb(var(--secondary));
+}
+
+.navContainer .authButtonContainer .themeButton,
+.navContainer .authButtonContainer .menuButton {
+  position: relative;
+  background-color: transparent;
+  display: inline-flex;
+  color: var(--text);
+  width: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navContainer .authButtonContainer .avatarButton {
+  background-color: transparent;
+  display: inline-flex;
+}
+
+.navContainer .authButtonContainer .avatarButton img {
+  width: 36px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+
+.navContainer .authButtonContainer .menuDropdown {
+  position: absolute;
+  top: 100%;
+  right: -50%;
+  padding: 12px 16px;
+  background-color: rgb(var(--secondary));
+  border: 2px solid var(--text);
+  border-radius: 8px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.navContainer .authButtonContainer .menuContainer {
+  display: none;
+  position: relative;
+}
+
+.navContainer .authButtonContainer .menuDropdown .menuItem {
+  color: var(--text);
+  gap: 10px;
+  text-wrap: nowrap;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navContainer .authButtonContainer .menuDropdown .menuItem:hover,
+.navContainer .authButtonContainer .themeButton:hover,
+.navContainer .authButtonContainer .menuButton:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 20px 40px;
+  }
+
+  .navContainer .aboutContainer {
+    gap: 20px;
+  }
+
+  .navContainer .aboutContainer .logo {
+    width: 40px;
+  }
+
+  .navContainer .aboutContainer .aboutButton,
+  .navContainer .authButtonContainer .authButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .navContainer .aboutContainer .aboutContent {
+    width: 300px;
+    font-size: 13px;
+  }
+
+  .navContainer .authButtonContainer .themeButton,
+  .navContainer .authButtonContainer .menuButton {
+    width: 20px;
+  }
+
+  .navContainer .authButtonContainer .avatarButton img {
+    width: 30px;
+  }
+}
+
+@media (max-width: 540px) {
+  .navContainer .authButtonContainer .authButton {
+    display: none;
+  }
+
+  .navContainer .authButtonContainer .menuContainer {
+    display: inline-flex;
+  }
+
+  .navContainer .authButtonContainer .menuDropdown .menuItem {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navContainer {
+    padding: 12px 20px;
+  }
+
+  .navContainer .aboutContainer .logo {
+    width: 36px;
+  }
+
+  .navContainer .aboutContainer .aboutButton {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .navContainer .aboutContainer .aboutContent {
+    padding: 8px 12px;
+    width: 280px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .navContainer .aboutContainer .aboutContent {
+    width: 240px;
+  }
+
+  .navContainer .authButtonContainer .menuDropdown .menuItem {
+    font-size: 12px;
+  }
+}

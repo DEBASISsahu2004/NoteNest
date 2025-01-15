@@ -1,0 +1,53 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer label {
+  font-size: 16px;
+  color: var(--text);
+}
+
+.inputContainer .inputWrapper input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid #666;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.inputContainer .inputWrapper input:focus {
+  border: 2px solid var(--text);
+}
+
+.inputContainer .inputWrapper {
+  position: relative;
+}
+
+.inputContainer .inputWrapper .toggleButton {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  background: none;
+  color: #666;
+}
+
+.inputContainer .inputWrapper .toggleButton:hover {
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .inputContainer .inputWrapper input {
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  .inputContainer label {
+    font-size: 14px;
+  }
+}

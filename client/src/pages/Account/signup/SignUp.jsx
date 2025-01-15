@@ -81,7 +81,7 @@ const SignUp = () => {
     toast.info('Verifying email...', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
-      const response = await fetch(`${VITE_APP_API_URL}api/users/sendotp`, {
+      const response = await fetch(`${VITE_APP_API_URL}/api/users/sendotp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

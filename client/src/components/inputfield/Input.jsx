@@ -21,7 +21,7 @@ const Input = ({ label, name, type, placeholder, value, onChange }) => {
                         onClick={togglePasswordVisibility}
                         className={styles.toggleButton}
                     >
-                        {!showPassword ? <Eye /> : <EyeClosed />}
+                        {showPassword ? <Eye className={styles.eye} /> : <EyeClosed className={styles.eye} />}
                     </button>
                 )}
             </div>
@@ -35,7 +35,7 @@ Input.propTypes = {
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
     value: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
 }
 
 export default Input

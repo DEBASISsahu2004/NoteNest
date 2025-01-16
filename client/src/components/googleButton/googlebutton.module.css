@@ -5,25 +5,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   position: relative;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .googleButton img {
   position: absolute;
-  left: 2%;
-  width: 40px;
+  left: 4%;
+  width: 26px;
   aspect-ratio: 1/1;
 }
 
 @media (max-width: 600px) {
   .googleButton {
-    font-size: 14px;
+    font-size: 13px;
+    padding: 8px 0;
   }
 
   .googleButton img {
-    width: 34px;
+    width: 22px;
   }
 }

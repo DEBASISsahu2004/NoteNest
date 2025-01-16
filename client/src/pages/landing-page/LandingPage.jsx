@@ -11,7 +11,7 @@ const LandingPage = () => {
 
   const handleClick = () => {
     if (isLoggedIn) {
-      navigate('/demo');
+      navigate('/dashboard');
     } else {
       navigate('/login');
     }

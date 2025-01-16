@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Sun from '../../../assets/images/icons/sun.svg';
-import Moon from '../../../assets/images/icons/moon.svg';
+import { Sun, Moon } from 'lucide-react';
 import Logodark from "../../../assets/images/logo-dark.svg";
 import Logolight from "../../../assets/images/logo-light.svg";
 import Input from "../../../components/inputfield/Input";
@@ -85,7 +84,8 @@ const SignUp = () => {
         setFormPage('verifyOTP');
         setTimer(300);
       } else {
-        toast.error(response.message || 'Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error(response.data.message || 'Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying email:', error);
@@ -117,7 +117,8 @@ const SignUp = () => {
         toast.success('OTP verified successfully', { theme: theme === 'dark' ? 'dark' : 'light' });
         setFormPage('setPassword');
       } else {
-        toast.error(response.message || 'Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error(response.data.message || 'Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying OTP:', error);
@@ -165,7 +166,8 @@ const SignUp = () => {
         dispatch(login());
         navigate('/demo');
       } else {
-        toast.error(response.message || 'Error creating account', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error(response.data.message || 'Error creating account', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error creating account:', error);
@@ -183,7 +185,8 @@ const SignUp = () => {
         toast.success('OTP sent to email', { theme: theme === 'dark' ? 'dark' : 'light' });
         setTimer(300);
       } else {
-        toast.error(response.message || 'Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error(response.data.message || 'Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error resending OTP:', error);
@@ -304,7 +307,7 @@ const SignUp = () => {
       <BrandName className={styles.brandName} />
 
       <button className={styles.themeButton} onClick={handleToggleTheme}>
-        <img className={theme === 'dark' ? styles.dark : styles.light} src={theme === 'dark' ? Sun : Moon} alt="theme icon" />
+        {theme === "dark" ? <Sun /> : <Moon />}
       </button>
     </div>
   )

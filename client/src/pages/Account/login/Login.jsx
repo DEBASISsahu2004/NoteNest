@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Sun from '../../../assets/images/icons/sun.svg';
-import Moon from '../../../assets/images/icons/moon.svg';
 import Logodark from "../../../assets/images/logo-dark.svg";
 import Logolight from "../../../assets/images/logo-light.svg";
 import Input from "../../../components/inputfield/Input";
@@ -14,6 +12,7 @@ import BrandName from "../../../components/brand-name/BrandName";
 import GoogleButton from "../../../components/googleButton/GoogleButton";
 import api from '../../../components/apis/api';
 import { login } from '../../../redux/actions/authActions';
+import { Sun, Moon } from 'lucide-react';
 
 const Login = () => {
   const theme = useSelector((state) => state.theme.theme);
@@ -124,7 +123,8 @@ const Login = () => {
         setFormPage('verifyOTP');
         setTimer(300);
       } else {
-        toast.error(response.data.message || 'Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error('Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying email:', error);
@@ -156,7 +156,8 @@ const Login = () => {
         toast.success('OTP verified successfully', { theme: theme === 'dark' ? 'dark' : 'light' });
         setFormPage('enterPassword');
       } else {
-        toast.error(response.data.message || 'Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error('Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying OTP:', error);
@@ -198,7 +199,8 @@ const Login = () => {
         setUserDetails((prevDetails) => ({ ...prevDetails, email: '', password: '', confirmPassword: '', otp: '' }));
         setFormPage('loginForm');
       } else {
-        toast.error(response.data.message || 'Error resetting password', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error('Error resetting password', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error resetting password:', error);
@@ -217,7 +219,8 @@ const Login = () => {
         toast.success('OTP sent to email', { theme: theme === 'dark' ? 'dark' : 'light' });
         setTimer(300);
       } else {
-        toast.error(response.data.message || 'Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log(response.data.message);
+        toast.error('Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
 
     } catch (error) {
@@ -374,7 +377,7 @@ const Login = () => {
       <BrandName className={styles.brandName} />
 
       <button className={styles.themeButton} onClick={handleToggleTheme}>
-        <img className={theme === 'dark' ? styles.dark : styles.light} src={theme === 'dark' ? Sun : Moon} alt="theme icon" />
+        {theme === "dark" ? <Sun /> : <Moon />}
       </button>
     </div>
   );

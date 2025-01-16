@@ -3,8 +3,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/landing-page/LandingPage'
 import Login from './pages/Account/login/Login'
-import SignUp from './pages/Account/signup/SignUp'
-import Demo from './pages/dashboard/Demo';
+import SignUp from './pages/Account/signup/SignUp';
+import Dashboard from './pages/dashboard/Dashboard';
 import { useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/protectedroute/ProtectedRoute';
@@ -27,11 +27,11 @@ function App() {
   return (
     <>
       <Router>
-      <Routes>
+        <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<LandingPage />} />
-          <Route path="/demo" element={<ProtectedRoute element={<Demo />} />} />
+          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
         </Routes>
       </Router>
       <ToastContainer />

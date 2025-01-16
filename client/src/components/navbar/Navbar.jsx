@@ -11,8 +11,6 @@ const Navbar = () => {
   const theme = useSelector((state) => state.theme.theme);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  console.log(isLoggedIn);
-
   const handleToggleTheme = () => {
     dispatch(toggleTheme());
   };

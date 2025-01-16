@@ -95,7 +95,7 @@
   background-color: rgb(var(--primary));
   color: white;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   border: 2px solid rgb(var(--primary));
   font-weight: 600;
   transition: all 0.3s ease-in-out;
@@ -142,9 +142,9 @@
 
 .formContainer form .buttonWrapper button {
   width: 48%;
-  padding: 10px;
+  padding: 10px 0;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   margin: 0;
 }
@@ -179,10 +179,11 @@
   right: 50px;
   background-color: var(--bg);
   display: inline-flex;
-  padding: 10px;
+  padding: 10px 0;
   border-radius: 25px;
   box-shadow: 0 0 2px var(--text);
   transition: all 0.3s ease-in-out;
+  color: var(--text);
 }
 
 .themeButton img {
@@ -235,9 +236,10 @@
     gap: 6px;
   }
 
-  .formContainer form .formSubmitButton {
-    font-size: 14px;
-    padding: 8px;
+  .formContainer form .formSubmitButton,
+  .formContainer form .buttonWrapper button {
+    font-size: 13px;
+    padding: 8px 0;
   }
 
   .themeButton {

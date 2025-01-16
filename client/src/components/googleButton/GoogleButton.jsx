@@ -1,4 +1,4 @@
-import styles from './googlebutton.module.css'
+import styles from './googlebutton.module.css';
 import Googlelogo from "../../assets/images/google-logo.svg";
 import { useGoogleLogin } from '@react-oauth/google';
 
@@ -12,9 +12,7 @@ const GoogleButton = () => {
 
     const theme = useSelector((state) => state.theme.theme);
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
-
     const googlelogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
             fetchUserData(tokenResponse.access_token);
@@ -23,27 +21,25 @@ const GoogleButton = () => {
 
     const fetchUserData = async (accessToken) => {
         try {
+
             const response = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
             const data = await response.json();
 
-            toast.info('Logging in...', { theme: theme === 'dark' ? 'dark' : 'light' });
+            toast.info('Logging in..., this might take some time', { theme: theme === 'dark' ? 'dark' : 'light' });
 
             const response2 = await api('/api/users/googleAuth', 'POST', { email: data.email, name: data.given_name });
-
             if (response2.status === 200) {
                 localStorage.setItem('username', data.given_name);
                 toast.success('Logged in with Google', { theme: theme === 'dark' ? 'dark' : 'light' });
                 dispatch(login());
-                navigate('/demo');
+                navigate('/dashboard');
             } else {
                 toast.error('Failed to login with Google', { theme: theme === 'dark' ? 'dark' : 'light' });
                 console.error("Failed to login with Google:", response2.message);

@@ -13,6 +13,7 @@ import { toggleTheme } from '../../../redux/actions/themeActions';
 import BrandName from "../../../components/brand-name/BrandName";
 import GoogleButton from "../../../components/googleButton/GoogleButton";
 import api from '../../../components/apis/api';
+import { login } from '../../../redux/actions/authActions';
 
 const Login = () => {
   const theme = useSelector((state) => state.theme.theme);
@@ -87,6 +88,7 @@ const Login = () => {
       if (response.status === 200) {
         toast.success('Login successful', { theme: theme === 'dark' ? 'dark' : 'light' });
         localStorage.setItem('username', response.data.username);
+        dispatch(login());
         navigate('/demo');
       } else {
         toast.error(response.data.message || 'Error logging in', { theme: theme === 'dark' ? 'dark' : 'light' });

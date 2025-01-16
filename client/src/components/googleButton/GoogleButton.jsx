@@ -2,17 +2,20 @@ import styles from './googlebutton.module.css'
 import Googlelogo from "../../assets/images/google-logo.svg";
 import { useGoogleLogin } from '@react-oauth/google';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import api from '../apis/api';
+import { login } from '../../redux/actions/authActions';
 
 const GoogleButton = () => {
 
     const theme = useSelector((state) => state.theme.theme);
     const navigate = useNavigate();
 
-    const login = useGoogleLogin({
+    const dispatch = useDispatch();
+
+    const googlelogin = useGoogleLogin({
         onSuccess: (tokenResponse) => {
             fetchUserData(tokenResponse.access_token);
         },
@@ -39,6 +42,7 @@ const GoogleButton = () => {
             if (response2.status === 200) {
                 localStorage.setItem('username', data.given_name);
                 toast.success('Logged in with Google', { theme: theme === 'dark' ? 'dark' : 'light' });
+                dispatch(login());
                 navigate('/demo');
             } else {
                 toast.error('Failed to login with Google', { theme: theme === 'dark' ? 'dark' : 'light' });
@@ -51,7 +55,7 @@ const GoogleButton = () => {
     };
 
     return (
-        <button className={styles.googleButton} onClick={() => login()}>
+        <button className={styles.googleButton} onClick={() => googlelogin()}>
             <img src={Googlelogo} alt="google logo" />
             Continue with Google
         </button>

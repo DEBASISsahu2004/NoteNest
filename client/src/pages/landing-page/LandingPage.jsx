@@ -1,19 +1,19 @@
 import styles from './landingPage.module.css'
 import Navbar from "../../components/navbar/Navbar"
 import BrandName from "../../components/brand-name/BrandName"
-
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 
 const LandingPage = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const navigate = useNavigate();
+  console.log(isLoggedIn);
 
   const handleClick = () => {
     if (isLoggedIn) {
-      // Redirect to the dashboard if the user is already logged in
-      window.location.href = '/demo';
+      navigate('/demo');
     } else {
-      // Redirect to the login page if the user is not logged in
-      window.location.href = '/login';
+      navigate('/login');
     }
   }
 

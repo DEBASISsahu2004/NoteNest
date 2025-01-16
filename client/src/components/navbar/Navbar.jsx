@@ -11,6 +11,8 @@ const Navbar = () => {
   const theme = useSelector((state) => state.theme.theme);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
+  console.log(isLoggedIn);
+
   const handleToggleTheme = () => {
     dispatch(toggleTheme());
   };
@@ -54,7 +56,9 @@ const Navbar = () => {
       <nav className={styles.navContainer}>
 
         <div className={styles.aboutContainer}>
-          <img className={styles.logo} src={theme === 'dark' ? Logodark : Logolight} alt="logo" />
+          <a href="/">
+            <img className={styles.logo} src={theme === 'dark' ? Logodark : Logolight} alt="logo" />
+          </a>
           {!isLoggedIn && (
             <div className={styles.aboutDropdown}>
               <button onMouseEnter={handleAboutEnter} onMouseLeave={handleAboutLeave} className={styles.aboutButton}>

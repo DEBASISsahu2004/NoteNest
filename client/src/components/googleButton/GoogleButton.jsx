@@ -32,7 +32,9 @@ const GoogleButton = () => {
 
             const data = await response.json();
 
-            const response2 = await api('/api/users/googleAuth', 'POST', { email: data.email, name: data.name });
+            toast.info('Logging in...', { theme: theme === 'dark' ? 'dark' : 'light' });
+
+            const response2 = await api('/api/users/googleAuth', 'POST', { email: data.email, name: data.given_name });
 
             if (response2.status === 200) {
                 localStorage.setItem('username', data.given_name);

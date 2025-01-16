@@ -7,6 +7,7 @@ import SignUp from './pages/Account/signup/SignUp'
 import Demo from './pages/dashboard/Demo';
 import { useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import ProtectedRoute from './components/protectedroute/ProtectedRoute';
 
 function App() {
   const theme = useSelector((state) => state.theme.theme)
@@ -26,11 +27,11 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
+      <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/demo" element={<Demo />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/demo" element={<ProtectedRoute element={<Demo />} />} />
         </Routes>
       </Router>
       <ToastContainer />

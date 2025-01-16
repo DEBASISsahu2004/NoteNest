@@ -5,8 +5,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
-const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
+import api from '../apis/api';
 
 const GoogleButton = () => {
 
@@ -33,15 +32,7 @@ const GoogleButton = () => {
 
             const data = await response.json();
 
-            const response2 = await fetch(`${VITE_APP_API_URL}/api/users/googleAuth`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email: data.email, name: data.name }),
-            });
-
-            const data2 = await response2.json();
+            const response2 = await api('/api/users/googleAuth', 'POST', { email: data.email, name: data.name });
 
             if (response2.status === 200) {
                 localStorage.setItem('username', data.given_name);
@@ -49,7 +40,7 @@ const GoogleButton = () => {
                 navigate('/demo');
             } else {
                 toast.error('Failed to login with Google', { theme: theme === 'dark' ? 'dark' : 'light' });
-                console.error("Failed to login with Google:", data2.message);
+                console.error("Failed to login with Google:", response2.message);
             }
 
         } catch (error) {

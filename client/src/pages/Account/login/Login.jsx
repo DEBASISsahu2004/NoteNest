@@ -12,8 +12,7 @@ import Input from "../../../components/inputfield/Input";
 import { toggleTheme } from '../../../redux/actions/themeActions';
 import BrandName from "../../../components/brand-name/BrandName";
 import GoogleButton from "../../../components/googleButton/GoogleButton";
-
-const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
+import api from '../../../components/apis/api';
 
 const Login = () => {
   const theme = useSelector((state) => state.theme.theme);
@@ -83,20 +82,14 @@ const Login = () => {
     setErrors({});
 
     try {
-      const response = await fetch(`${VITE_APP_API_URL}/api/users/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
+      const response = await api('/api/users/login', 'POST', { email, password });
 
       if (response.status === 200) {
         toast.success('Login successful', { theme: theme === 'dark' ? 'dark' : 'light' });
-        localStorage.setItem('username', data.username);
+        localStorage.setItem('username', response.data.username);
         navigate('/demo');
       } else {
-        toast.error(data.message || 'Error logging in', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message || 'Error logging in', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error logging in:', error);
@@ -122,20 +115,14 @@ const Login = () => {
     setErrors({});
 
     try {
-      const response = await fetch(`${VITE_APP_API_URL}/api/users/verifyemail`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
+      const response = await api('/api/users/verifyemail', 'POST', { email });
 
       if (response.status === 200) {
         toast.success('OTP sent to email', { theme: theme === 'dark' ? 'dark' : 'light' });
         setFormPage('verifyOTP');
         setTimer(300);
       } else {
-        toast.error(data.message || 'Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message || 'Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying email:', error);
@@ -161,19 +148,13 @@ const Login = () => {
     setErrors({});
 
     try {
-      const response = await fetch(`${VITE_APP_API_URL}/api/users/verifyotp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, otp }),
-      });
-
-      const data = await response.json();
+      const response = await api('/api/users/verifyotp', 'POST', { email, otp });
 
       if (response.status === 200) {
         toast.success('OTP verified successfully', { theme: theme === 'dark' ? 'dark' : 'light' });
         setFormPage('enterPassword');
       } else {
-        toast.error(data.message || 'Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message || 'Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying OTP:', error);
@@ -208,20 +189,14 @@ const Login = () => {
     setErrors({});
 
     try {
-      const response = await fetch(`${VITE_APP_API_URL}/api/users/resetpassword`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      })
-
-      const data = await response.json();
+      const response = await api('/api/users/resetpassword', 'POST', { email, password });
 
       if (response.status === 200) {
         toast.success('Password reset successfully', { theme: theme === 'dark' ? 'dark' : 'light' });
         setUserDetails((prevDetails) => ({ ...prevDetails, email: '', password: '', confirmPassword: '', otp: '' }));
         setFormPage('loginForm');
       } else {
-        toast.error(data.message || 'Error resetting password', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message || 'Error resetting password', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error resetting password:', error);
@@ -234,20 +209,13 @@ const Login = () => {
     try {
       const { email } = userDetails;
 
-      const response = await fetch(`${VITE_APP_API_URL}/api/users/resendotp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
+      const response = await api('/api/users/resendotp', 'POST', { email });
 
       if (response.status === 200) {
         toast.success('OTP sent to email', { theme: theme === 'dark' ? 'dark' : 'light' });
         setTimer(300);
       } else {
-        toast.error(data.message || 'Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
-        resendOtp();
+        toast.error(response.data.message || 'Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
 
     } catch (error) {

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
+import { Sun, Moon } from 'lucide-react';
 
 import Logodark from "../../../assets/images/logo-dark.svg";
 import Logolight from "../../../assets/images/logo-light.svg";
@@ -12,7 +13,6 @@ import BrandName from "../../../components/brand-name/BrandName";
 import GoogleButton from "../../../components/googleButton/GoogleButton";
 import api from '../../../components/apis/api';
 import { login } from '../../../redux/actions/authActions';
-import { Sun, Moon } from 'lucide-react';
 
 const Login = () => {
   const theme = useSelector((state) => state.theme.theme);
@@ -88,9 +88,14 @@ const Login = () => {
         toast.success('Login successful', { theme: theme === 'dark' ? 'dark' : 'light' });
         localStorage.setItem('username', response.data.username);
         dispatch(login());
-        navigate('/demo');
-      } else {
+        navigate('/dashboard');
+      } else if (response.status === 400) {
+        console.log(response.data.message);
         toast.error(response.data.message || 'Error logging in', { theme: theme === 'dark' ? 'dark' : 'light' });
+      }
+      else {
+        console.log(response.data.message);
+        toast.error('Error logging in', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error logging in:', error);

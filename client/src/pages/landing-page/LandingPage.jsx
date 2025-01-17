@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 const LandingPage = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
-  console.log(isLoggedIn);
 
   const handleClick = () => {
     if (isLoggedIn) {

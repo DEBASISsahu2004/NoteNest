@@ -8,9 +8,11 @@ const {
   verifyEmail,
   resetPassword,
   login,
+  getUserProfile,
 } = require("../controllers/userController");
 require("dotenv").config();
 const router = express.Router();
+const authenticateToken = require("../middleware/authenticateToken");
 
 //signup
 router.post("/sendotp", sendOtp);
@@ -24,5 +26,8 @@ router.post("/login", login);
 router.post("/verifyotp", checkotp);
 router.post("/resendotp", resendotp);
 router.post("/googleAuth", googleAuth);
+
+// routes after login
+router.get("/profile", authenticateToken, getUserProfile);
 
 module.exports = router;

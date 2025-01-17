@@ -7,6 +7,7 @@ const api = async (url, method = "GET", body = null) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     };
 
     if (body && method !== "GET") {

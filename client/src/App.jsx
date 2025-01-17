@@ -4,7 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/landing-page/LandingPage'
 import Login from './pages/Account/login/Login'
 import SignUp from './pages/Account/signup/SignUp';
-import Dashboard from './pages/dashboard/Dashboard';
+// import Dashboard from './pages/dashboard/Dashboard';
+import Profile from './pages/dashboard/profile/Profile';
 import { useSelector } from 'react-redux'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/protectedroute/ProtectedRoute';
@@ -31,7 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<LandingPage />} />
-          <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+          <Route path="/dashboard" element={<ProtectedRoute element={<Profile />} />} />
         </Routes>
       </Router>
       <ToastContainer />

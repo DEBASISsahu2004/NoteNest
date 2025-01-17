@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import api from '../apis/api';
 import { login } from '../../redux/actions/authActions';
+import getRandomProfilePic from '../randomprofilepic/randomprofilepic';
 
 const GoogleButton = () => {
 
@@ -34,7 +35,8 @@ const GoogleButton = () => {
 
             toast.info('Logging in..., this might take some time', { theme: theme === 'dark' ? 'dark' : 'light' });
 
-            const response2 = await api('/api/users/googleAuth', 'POST', { email: data.email, name: data.given_name });
+            const profilepic = await getRandomProfilePic();
+            const response2 = await api('/api/users/googleAuth', 'POST', { email: data.email, name: data.given_name, profilepic });
             if (response2.status === 200) {
                 localStorage.setItem('username', data.given_name);
                 toast.success('Logged in with Google', { theme: theme === 'dark' ? 'dark' : 'light' });

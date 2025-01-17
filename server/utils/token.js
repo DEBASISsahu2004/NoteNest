@@ -11,4 +11,23 @@ const verifyAccessToken = (token) => {
   return JWT.verify(token, process.env.JWT_SECRET);
 };
 
-module.exports = { generateAccessToken, verifyAccessToken };
+const generateRefreshToken = (user) => {
+  return JWT.sign(
+    { id: user._id, email: user.email },
+    process.env.JWT_REFRESH_SECRET,
+    {
+      expiresIn: "7d",
+    }
+  );
+};
+
+const verifyRefreshToken = (token) => {
+  return JWT.verify(token, process.env.JWT_REFRESH_SECRET);
+};
+
+module.exports = {
+  generateAccessToken,
+  verifyAccessToken,
+  generateRefreshToken,
+  verifyRefreshToken,
+};

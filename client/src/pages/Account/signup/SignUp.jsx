@@ -13,6 +13,7 @@ import BrandName from "../../../components/brand-name/BrandName";
 import GoogleButton from "../../../components/googleButton/GoogleButton";
 import api from '../../../components/apis/api';
 import { login } from '../../../redux/actions/authActions';
+import getRandomProfilePic from "../../../components/randomprofilepic/randomprofilepic";
 
 const SignUp = () => {
   const theme = useSelector((state) => state.theme.theme);
@@ -85,7 +86,7 @@ const SignUp = () => {
         setTimer(300);
       } else {
         console.log(response.data.message);
-        toast.error(response.data.message || 'Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error('Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying email:', error);
@@ -118,7 +119,7 @@ const SignUp = () => {
         setFormPage('setPassword');
       } else {
         console.log(response.data.message);
-        toast.error(response.data.message || 'Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error('Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying OTP:', error);
@@ -158,16 +159,17 @@ const SignUp = () => {
     toast.info('Creating account...', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
-      const response = await api('/api/users/signup', 'POST', { username, email, password });
+      const profilepic = await getRandomProfilePic();
+      const response = await api('/api/users/signup', 'POST', { username, email, password, profilepic });
 
       if (response.status === 200) {
         toast.success('Account created successfully', { theme: theme === 'dark' ? 'dark' : 'light' });
         localStorage.setItem('username', username);
         dispatch(login());
-        navigate('/demo');
+        navigate('/dashboard');
       } else {
         console.log(response.data.message);
-        toast.error(response.data.message || 'Error creating account', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error('Error creating account', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error creating account:', error);
@@ -186,7 +188,7 @@ const SignUp = () => {
         setTimer(300);
       } else {
         console.log(response.data.message);
-        toast.error(response.data.message || 'Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error('Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error resending OTP:', error);

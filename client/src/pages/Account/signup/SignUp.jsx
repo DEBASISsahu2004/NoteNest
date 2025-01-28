@@ -63,10 +63,8 @@ const SignUp = () => {
 
     let validationErrors = {};
     if (email === '') {
-      toast.error('Please enter your email', { theme: theme === 'dark' ? 'dark' : 'light' });
-      validationErrors.email = 'Please enter your email';
+      validationErrors.email = 'Email cannot be empty';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error('Please enter a valid email', { theme: theme === 'dark' ? 'dark' : 'light' });
       validationErrors.email = 'Please enter a valid email';
     }
 
@@ -76,21 +74,23 @@ const SignUp = () => {
     }
 
     setErrors({});
-    toast.info('Verifying email...', { theme: theme === 'dark' ? 'dark' : 'light' });
+
+    toast.info('Verifying email... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
-      const response = await api('/api/users/sendotp', 'POST', { email });
+      const response = await api('/users/sendotp', 'POST', { email });
+
       if (response.status === 200) {
-        toast.success('OTP sent to email', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
         setFormPage('verifyOTP');
         setTimer(300);
       } else {
         console.log(response.data.message);
-        toast.error('Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying email:', error);
-      toast.error('Error verifying email', { theme: theme === 'dark' ? 'dark' : 'light' });
+      toast.error('Error verifying email, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
     }
   };
 
@@ -100,7 +100,6 @@ const SignUp = () => {
 
     let validationErrors = {};
     if (otp === '') {
-      toast.error('Please enter the OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
       validationErrors.otp = 'OTP is required';
     }
 
@@ -110,20 +109,21 @@ const SignUp = () => {
     }
 
     setErrors({});
-    toast.info('Verifying OTP...', { theme: theme === 'dark' ? 'dark' : 'light' });
+    toast.info('Verifying OTP... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
-      const response = await api('/api/users/verifyotp', 'POST', { email, otp });
+      const response = await api('/users/verifyotp', 'POST', { email, otp });
+
       if (response.status === 200) {
-        toast.success('OTP verified successfully', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
         setFormPage('setPassword');
       } else {
         console.log(response.data.message);
-        toast.error('Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error verifying OTP:', error);
-      toast.error('Error verifying OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+      toast.error('Error verifying OTP, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
     }
   };
 
@@ -150,49 +150,48 @@ const SignUp = () => {
     }
 
     if (Object.keys(validationErrors).length > 0) {
-      toast.error('Please fill in all required fields', { theme: theme === 'dark' ? 'dark' : 'light' });
       setErrors(validationErrors);
       return;
     }
 
     setErrors({});
-    toast.info('Creating account...', { theme: theme === 'dark' ? 'dark' : 'light' });
+    toast.info('Creating account... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
       const profilepic = await getRandomProfilePic();
-      const response = await api('/api/users/signup', 'POST', { username, email, password, profilepic });
+      const response = await api('/users/signup', 'POST', { username, email, password, profilepic });
 
       if (response.status === 200) {
-        toast.success('Account created successfully', { theme: theme === 'dark' ? 'dark' : 'light' });
-        localStorage.setItem('username', username);
+        toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
         dispatch(login());
         navigate('/dashboard');
       } else {
         console.log(response.data.message);
-        toast.error('Error creating account', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error creating account:', error);
-      toast.error('Error creating account', { theme: theme === 'dark' ? 'dark' : 'light' });
+      toast.error('Error creating account, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
     }
   };
 
   const resendOtp = async () => {
-    toast.info('Resending OTP...', { theme: theme === 'dark' ? 'dark' : 'light' });
+    toast.info('Resending OTP... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
     try {
       const { email } = userDetails;
 
-      const response = await api('/api/users/resendotp', 'POST', { email });
+      const response = await api('/users/resendotp', 'POST', { email });
+
       if (response.status === 200) {
-        toast.success('OTP sent to email', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
         setTimer(300);
       } else {
         console.log(response.data.message);
-        toast.error('Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+        toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
       }
     } catch (error) {
       console.log('Error resending OTP:', error);
-      toast.error('Error resending OTP', { theme: theme === 'dark' ? 'dark' : 'light' });
+      toast.error('Error resending OTP, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
     }
   }
 

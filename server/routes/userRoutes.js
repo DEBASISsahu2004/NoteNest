@@ -23,11 +23,12 @@ router.post("/verifyemail", verifyEmail);
 router.post("/resetpassword", resetPassword);
 router.post("/login", login);
 
+// common routes for login and signup
 router.post("/verifyotp", checkotp);
 router.post("/resendotp", resendotp);
 router.post("/googleAuth", googleAuth);
 
-// routes after login
+// require auth
 router.get("/profile", authenticateToken, getUserProfile);
 
 module.exports = router;

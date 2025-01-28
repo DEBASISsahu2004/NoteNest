@@ -2,21 +2,20 @@ const jwt = require("jsonwebtoken");
 const { verifyAccessToken } = require("../utils/token");
 
 function authenticateToken(req, res, next) {
-  const token = req.cookies.token;
+  const token = req.cookies.JWT_Token;
 
-  // If token not present, deny access
+  // If token is not found, return response with status 403 (Forbidden) and move the user to login page
   if (!token) {
-    return res.status(403).json({ message: "Token not found, login" }); // Forbidden
+    return res.status(403).json({ message: "Token not found, Please login" }); 
   }
 
-  // Verify token
+  // If token found verify the token and move forward
   try {
     const user = verifyAccessToken(token);
     req.user = user;
-    next(); // Proceed to the next middleware or route handler
+    next();
   } catch (err) {
-    console.error("Error verifying token:", err);
-    return res.status(403).json({ message: "Error verifying token" }); // Forbidden
+    return res.status(403).json({ message: "Error verifying token" });
   }
 }
 

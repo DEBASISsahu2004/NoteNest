@@ -17,17 +17,11 @@ const api = async (url, method = "GET", body = null) => {
     const response = await fetch(`${VITE_APP_API_URL}${url}`, options);
 
     const status = response.status;
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${status}`);
-    }
-
     const data = await response.json();
 
     return { status, data };
   } catch (error) {
-    console.error("Error fetching data:", error);
-    return Promise.reject(error.message);
+    return error;
   }
 };
 

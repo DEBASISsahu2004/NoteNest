@@ -1,6 +1,6 @@
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
+require("dotenv").config();
 const User = require("../models/user");
 const Note = require("../models/note");
 const { sendOtpEmail, sendEmail } = require("../config/email");
@@ -15,7 +15,7 @@ const sendOtp = async (req, res) => {
 
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ message: "User already exists 🙄" });
     }
 
     const otp = generateOtp();
@@ -23,9 +23,10 @@ const sendOtp = async (req, res) => {
 
     await sendOtpEmail(email, otp);
 
-    return res.status(200).json({ message: "OTP sent to email" });
+    return res.status(200).json({ message: "OTP sent to email 👍" });
   } catch (error) {
-    return res.status(500).json({ message: "Error sending OTP", error });
+    console.log(error);
+    return res.status(500).json({ message: "Error sending OTP 😵" });
   }
 };
 
@@ -33,7 +34,7 @@ const signUp = async (req, res) => {
   try {
     const { email, username, password, profilepic } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT));
     const newUser = new User({
       email,
       username,
@@ -42,20 +43,12 @@ const signUp = async (req, res) => {
     });
     await newUser.save();
 
-    const accessToken = generateAccessToken(newUser);
+    await generateAccessToken(newUser, res);
 
-    res.cookie("token", accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "Strict",
-    });
-
-    return res.status(200).json({
-      message: "User created successfully",
-      user: newUser,
-    });
+    return res.status(200).json({ message: "Account Created 👍" });
   } catch (error) {
-    return res.status(500).json({ message: "Error in creating user", error });
+    console.log(error);
+    return res.status(500).json({ message: "Error while creating account 😵‍💫" });
   }
 };
 
@@ -70,28 +63,34 @@ const verifyEmail = async (req, res) => {
       storeOtp(email, otp);
 
       await sendOtpEmail(email, otp);
-      return res.status(200).json({ message: "OTP sent to email" });
+      return res.status(200).json({ message: "OTP sent to email 👍" });
     }
   } catch (error) {
-    return res.status(500).json({ message: "Error verifying email", error });
+    console.log(error);
+    return res.status(500).json({ message: "Error sending OTP 😵" });
   }
 };
 
 const resetPassword = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT));
+
     const user = await User.findOneAndUpdate(
       { email },
       { password: hashedPassword }
     );
+
     if (user) {
-      return res.status(200).json({ message: "Password reset successfully" });
+      return res
+        .status(200)
+        .json({ message: "Password changed successfully 👍" });
     } else {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).json({ message: "User not found 🧐" });
     }
   } catch (error) {
-    return res.status(500).json({ message: "Error resetting password", error });
+    console.log(error);
+    return res.status(500).json({ message: "Error resetting password" });
   }
 };
 
@@ -101,28 +100,22 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res
+        .status(400)
+        .json({ message: "User not found, Please Sign Up 🙄" });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(400).json({ message: "Invalid password" });
+      return res.status(400).json({ message: "Incorrect password 🧐" });
     }
 
-    const accessToken = generateAccessToken(user);
+    await generateAccessToken(user, res);
 
-    res.cookie("token", accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "Strict",
-    });
-
-    return res.status(200).json({
-      message: "User logged in successfully",
-      username: user.username,
-    });
+    return res.status(200).json({ message: "Successfully logged in 😁" });
   } catch (error) {
-    return res.status(500).json({ message: "Error logging in", error });
+    console.log(error);
+    return res.status(500).json({ message: "Error while logging in 😵‍💫" });
   }
 };
 
@@ -131,20 +124,25 @@ const checkotp = async (req, res) => {
 
   if (verifyOtp(email, otp)) {
     deleteOtp(email);
-    return res.status(200).json({ message: "OTP verified successfully" });
+    return res.status(200).json({ message: "OTP verified successfully 😁" });
   } else {
-    return res.status(400).json({ message: "Invalid OTP" });
+    return res.status(400).json({ message: "Invalid OTP 🧐" });
   }
 };
 
 const resendotp = async (req, res) => {
   const { email } = req.body;
 
-  const otp = generateOtp();
-  storeOtp(email, otp);
-  await sendOtpEmail(email, otp);
+  try {
+    const otp = generateOtp();
+    storeOtp(email, otp);
+    await sendOtpEmail(email, otp);
 
-  return res.status(200).json({ message: "OTP sent to email" });
+    return res.status(200).json({ message: "OTP sent to email 👍" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error sending OTP 😵" });
+  }
 };
 
 const googleAuth = async (req, res) => {
@@ -158,12 +156,12 @@ const googleAuth = async (req, res) => {
         <div style="font-family: Arial, sans-serif; text-align: center;">
           <h2>Welcome to NoteNest</h2>
           <p>Your account has been created successfully. Please use the following password to log in:</p>
-          <h1 style="color:rgb(0, 166, 255);">${password}</h1>
+          <h1 style="color:rgb(0, 128, 255);">${password}</h1>
           <p>We recommend changing your password after logging in for the first time.</p>
         </div>
       `;
       await sendEmail(email, "Your Password", html);
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT));
 
       user = new User({
         email,
@@ -171,41 +169,38 @@ const googleAuth = async (req, res) => {
         password: hashedPassword,
         profilepic,
       });
+
       await user.save();
+      user = await User.findOne({ email });
     }
 
-    const accessToken = generateAccessToken(user);
+    await generateAccessToken(user._id, res);
+    console.log("test");
 
-    res.cookie("token", accessToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "Strict",
-    });
-
-    return res.status(200).json({ message: "User authenticated successfully" });
+    return res.status(200).json({ message: "Sucessfully logged in 😁" });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
-      .json({ message: "Error in Google authentication", error });
+      .json({ message: "Failed to login with Google", error });
   }
 };
 
-// user profile
+// Fetching user data
 const getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id).select("-password");
     const notes = await Note.find({ user: req.user.id });
 
-    return res.status(200).json({
-      username: user.username,
-      email: user.email,
-      profilepic: user.profilepic,
-      notes: notes,
-      totalNotes: notes.length,
-      favoriteNotes: notes.filter((note) => note.isFavorite).length,
-    });
+    return res.status(200).json({ user, notes });
+
+    // username: user.username,
+    // email: user.email,
+    // profilepic: user.profilepic,
+    // notes: notes,
+    // totalNotes: notes.length,
+    // favoriteNotes: notes.filter((note) => note.isFavorite).length,
   } catch (error) {
-    console.error("Error fetching user profile:", error);
     return res
       .status(500)
       .json({ message: "Error fetching user profile", error });

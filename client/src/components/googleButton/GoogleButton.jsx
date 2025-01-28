@@ -33,27 +33,24 @@ const GoogleButton = () => {
                 throw new Error(`HTTP error! status: ${googleResponse.status}`);
             }
             const googleData = await googleResponse.json();
-            console.log("googleData:", googleData);
 
             toast.info('Trying to login, This might take some time ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
             const profilepic = getRandomProfilePic();
+
             const response = await api('/users/googleAuth', 'POST', { email: googleData.email, name: googleData.given_name, profilepic });
 
-            const data = await response.json();
-            console.log("data:", data);
-
             if (response.status === 200) {
-                localStorage.setItem('username', googleData.given_name);
-                toast.success(data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
+                toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
                 dispatch(login());
                 navigate('/dashboard');
             } else {
-                toast.error(data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
-                console.error("Google login Error: ", data.error);
+                console.error(response.data.message);
+                toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
             }
         } catch (error) {
-            console.error("Error fetching user data:", error);
+            console.error('Error while loggin in', error);
+            toast.error('Error while loggin in, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
         }
     };
 

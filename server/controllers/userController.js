@@ -34,7 +34,10 @@ const signUp = async (req, res) => {
   try {
     const { email, username, password, profilepic } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT));
+    const hashedPassword = await bcrypt.hash(
+      password,
+      parseInt(process.env.SALT)
+    );
     const newUser = new User({
       email,
       username,
@@ -74,7 +77,10 @@ const verifyEmail = async (req, res) => {
 const resetPassword = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT));
+    const hashedPassword = await bcrypt.hash(
+      password,
+      parseInt(process.env.SALT)
+    );
 
     const user = await User.findOneAndUpdate(
       { email },
@@ -161,7 +167,10 @@ const googleAuth = async (req, res) => {
         </div>
       `;
       await sendEmail(email, "Your Password", html);
-      const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALT));
+      const hashedPassword = await bcrypt.hash(
+        password,
+        parseInt(process.env.SALT)
+      );
 
       user = new User({
         email,
@@ -174,15 +183,12 @@ const googleAuth = async (req, res) => {
       user = await User.findOne({ email });
     }
 
-    await generateAccessToken(user._id, res);
-    console.log("test");
+    await generateAccessToken(user, res);
 
     return res.status(200).json({ message: "Sucessfully logged in 😁" });
   } catch (error) {
     console.log(error);
-    return res
-      .status(500)
-      .json({ message: "Failed to login with Google", error });
+    return res.status(500).json({ message: "Failed to login with Google 😵‍💫" });
   }
 };
 

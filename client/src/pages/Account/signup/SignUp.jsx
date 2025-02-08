@@ -13,7 +13,7 @@ import BrandName from "../../../components/brand-name/BrandName";
 import GoogleButton from "../../../components/googleButton/GoogleButton";
 import api from '../../../components/apis/api';
 import { login } from '../../../redux/actions/authActions';
-import getRandomProfilePic from "../../../components/randomprofilepic/randomprofilepic";
+import { getRandomProfilePic } from "../../../components/randomprofilepic/randomprofilepic";
 
 const SignUp = () => {
   const theme = useSelector((state) => state.theme.theme);

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import api from '../apis/api';
 import { login } from '../../redux/actions/authActions';
-import getRandomProfilePic from '../randomprofilepic/randomprofilepic';
+import { getRandomProfilePic } from '../randomprofilepic/randomprofilepic';
 
 const GoogleButton = () => {
 

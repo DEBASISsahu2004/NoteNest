@@ -1,6 +1,5 @@
 const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-require("dotenv").config();
 const User = require("../models/user");
 const Note = require("../models/note");
 const { sendOtpEmail, sendEmail } = require("../config/email");
@@ -25,7 +24,7 @@ const sendOtp = async (req, res) => {
 
     return res.status(200).json({ message: "OTP sent to email 👍" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: "Error sending OTP 😵" });
   }
 };
@@ -50,7 +49,7 @@ const signUp = async (req, res) => {
 
     return res.status(200).json({ message: "Account Created 👍" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: "Error while creating account 😵‍💫" });
   }
 };
@@ -67,9 +66,11 @@ const verifyEmail = async (req, res) => {
 
       await sendOtpEmail(email, otp);
       return res.status(200).json({ message: "OTP sent to email 👍" });
+    } else {
+      return res.status(400).json({ message: "User not found 🧐" });
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: "Error sending OTP 😵" });
   }
 };
@@ -95,7 +96,7 @@ const resetPassword = async (req, res) => {
       return res.status(400).json({ message: "User not found 🧐" });
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: "Error resetting password" });
   }
 };
@@ -120,7 +121,7 @@ const login = async (req, res) => {
 
     return res.status(200).json({ message: "Successfully logged in 😁" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: "Error while logging in 😵‍💫" });
   }
 };
@@ -146,7 +147,7 @@ const resendotp = async (req, res) => {
 
     return res.status(200).json({ message: "OTP sent to email 👍" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: "Error sending OTP 😵" });
   }
 };
@@ -187,7 +188,7 @@ const googleAuth = async (req, res) => {
 
     return res.status(200).json({ message: "Sucessfully logged in 😁" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({ message: "Failed to login with Google 😵‍💫" });
   }
 };
@@ -199,17 +200,47 @@ const getUserProfile = async (req, res) => {
     const notes = await Note.find({ user: req.user.id });
 
     return res.status(200).json({ user, notes });
-
-    // username: user.username,
-    // email: user.email,
-    // profilepic: user.profilepic,
-    // notes: notes,
-    // totalNotes: notes.length,
-    // favoriteNotes: notes.filter((note) => note.isFavorite).length,
   } catch (error) {
+    console.error(error);
     return res
       .status(500)
-      .json({ message: "Error fetching user profile", error });
+      .json({ message: "Failed to fetching user profile 😵‍💫" });
+  }
+};
+
+const changeUserProfilePic = async (req, res) => {
+  try {
+    const { profilepic } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { profilepic },
+      { new: true }
+    ).select("-password");
+
+    return res
+      .status(200)
+      .json({ message: "Profile pic updated successfully 😁", user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Failed to update profile pic 😵‍💫" });
+  }
+};
+
+const changeUsername = async (req, res) => {
+  try {
+    const { username } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { username },
+      { new: true }
+    ).select("-password");
+
+    return res
+      .status(200)
+      .json({ message: "Username updated successfully 😁", user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Failed to update username 😵‍💫" });
   }
 };
 
@@ -223,4 +254,6 @@ module.exports = {
   resetPassword,
   login,
   getUserProfile,
+  changeUserProfilePic,
+  changeUsername,
 };

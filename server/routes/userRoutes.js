@@ -9,10 +9,12 @@ const {
   resetPassword,
   login,
   getUserProfile,
+  changeUserProfilePic,
+  changeUsername,
 } = require("../controllers/userController");
-require("dotenv").config();
-const router = express.Router();
 const authenticateToken = require("../middleware/authenticateToken");
+
+const router = express.Router();
 
 //signup
 router.post("/sendotp", sendOtp);
@@ -30,5 +32,7 @@ router.post("/googleAuth", googleAuth);
 
 // require auth
 router.get("/profile", authenticateToken, getUserProfile);
+router.post("/changeprofilepic", authenticateToken, changeUserProfilePic);
+router.post("/changeusername", authenticateToken, changeUsername);
 
 module.exports = router;

@@ -4,12 +4,30 @@ import styles from './navbar.module.css';
 import Logodark from '../../assets/images/logo-dark.svg';
 import Logolight from '../../assets/images/logo-light.svg';
 import { Sun, Moon, UserRoundPlus } from 'lucide-react';
-import Avatar1 from '../../assets/images/avatars/avatar1.svg';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Update this import
+import { fetchUserData } from '../userData/userData';
+import { updateProfilePic } from '../../redux/actions/userActions';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Ensure useNavigate is used correctly
+
   const theme = useSelector((state) => state.theme.theme);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const profilePic = useSelector((state) => state.user.profilePic);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const data = await fetchUserData(theme);
+      if (data && data.userData.profilepic) {
+        dispatch(updateProfilePic(data.userData.profilepic));
+      }
+    };
+    if (isLoggedIn) {
+      getUserData();
+    }
+  }, [isLoggedIn]);
 
   const handleToggleTheme = () => {
     dispatch(toggleTheme());
@@ -85,8 +103,8 @@ const Navbar = () => {
           </button>
 
           {isLoggedIn && (
-            <button className={styles.avatarButton}>
-              <img src={Avatar1} alt="avatar" />
+            <button onClick={() => navigate('/profile')} className={styles.avatarButton}>
+              <img src={profilePic} alt="avatar" />
             </button>
           )}
 

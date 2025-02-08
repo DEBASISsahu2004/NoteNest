@@ -22,9 +22,9 @@ const images = [
   avatar10,
 ];
 
-function getRandomProfilePic() {
+const getRandomProfilePic = () => {
   const randomIndex = Math.floor(Math.random() * images.length);
   return images[randomIndex];
-}
+};
 
-export default getRandomProfilePic;
+export { getRandomProfilePic, images };

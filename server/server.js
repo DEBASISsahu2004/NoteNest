@@ -5,7 +5,6 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 require("dotenv").config();
 const UserRouter = require("./routes/userRoutes");
-const authRoutes = require("./routes/auth");
 
 connectDB();
 
@@ -20,7 +19,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(cookieParser()); 
+app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -28,7 +27,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", UserRouter);
-app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
 

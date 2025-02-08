@@ -16,6 +16,11 @@ const api = async (url, method = "GET", body = null) => {
 
     const response = await fetch(`${VITE_APP_API_URL}${url}`, options);
 
+    if (response.status === 403) {
+      window.location.href = "/login";
+      return;
+    }
+
     const status = response.status;
     const data = await response.json();
 

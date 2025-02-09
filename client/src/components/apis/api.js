@@ -17,6 +17,7 @@ const api = async (url, method = "GET", body = null) => {
     const response = await fetch(`${VITE_APP_API_URL}${url}`, options);
 
     if (response.status === 403) {
+      localStorage.removeItem("isLoggedIn");
       window.location.href = "/login";
       return;
     }

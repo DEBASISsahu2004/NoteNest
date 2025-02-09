@@ -15,6 +15,7 @@ function authenticateToken(req, res, next) {
     req.user = user;
     next();
   } catch (err) {
+    res.clearCookie("JWT_Token");
     return res.status(403).json({ message: "Error verifying token" });
   }
 }

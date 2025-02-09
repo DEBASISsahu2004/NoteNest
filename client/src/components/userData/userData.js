@@ -1,16 +1,13 @@
 import api from "../../components/apis/api";
 import { toast } from "react-toastify";
 
-let userData = {};
-let userNoteData = {};
-
 const fetchUserData = async (theme) => {
   try {
-    const response = await api("/users/profile", "GET");
+    const response = await api("/users/getuserdata", "GET");
 
     if (response.status === 200) {
-      userData = response.data.user;
-      userNoteData = response.data.notes;
+      const userData = response.data.user;
+      const userNoteData = response.data.notes;
       return { userData, userNoteData };
     } else {
       return response.data.message;
@@ -23,4 +20,4 @@ const fetchUserData = async (theme) => {
   }
 };
 
-export { userData, userNoteData, fetchUserData };
+export { fetchUserData };

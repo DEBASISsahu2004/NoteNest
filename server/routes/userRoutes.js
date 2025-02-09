@@ -31,7 +31,7 @@ router.post("/resendotp", resendotp);
 router.post("/googleAuth", googleAuth);
 
 // require auth
-router.get("/profile", authenticateToken, getUserProfile);
+router.get("/getuserdata", authenticateToken, getUserProfile);
 router.post("/changeprofilepic", authenticateToken, changeUserProfilePic);
 router.post("/changeusername", authenticateToken, changeUsername);
 

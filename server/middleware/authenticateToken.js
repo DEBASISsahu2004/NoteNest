@@ -5,9 +5,9 @@ function authenticateToken(req, res, next) {
   const token = req.cookies.JWT_Token;
 
   // If token is not found, return response with status 403 (Forbidden) and move the user to login page
-  if (!token) {
-    return res.status(403).json({ message: "Token not found, Please login" }); 
-  }
+  // if (!token) {
+  //   return res.status(403).json({ message: "Token not found, Please login" }); 
+  // }
 
   // If token found verify the token and move forward
   try {

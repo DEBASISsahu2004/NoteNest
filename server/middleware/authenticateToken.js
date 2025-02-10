@@ -18,7 +18,6 @@ const authenticateToken = async (req, res, next) => {
   } catch (err) {
     console.log("Error verifying token: ", err);
     console.log("Error verifying token: ", token);
-    res.clearCookie("JWT_Token");
     return res.status(403).json({ message: "Error verifying token" });
   }
 }

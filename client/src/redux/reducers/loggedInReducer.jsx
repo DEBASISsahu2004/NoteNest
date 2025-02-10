@@ -11,7 +11,7 @@ const loggedInReducer = (state = initialState, action) => {
                 isLoggedIn: true,
             };
         case 'LOGOUT':
-            localStorage.setItem("isLoggedIn", false);
+            localStorage.removeItem("isLoggedIn");
             return {
                 ...state,
                 isLoggedIn: false,

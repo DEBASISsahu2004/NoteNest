@@ -11,6 +11,7 @@ const {
   getUserProfile,
   changeUserProfilePic,
   changeUsername,
+  logoutUser,
 } = require("../controllers/userController");
 const authenticateToken = require("../middleware/authenticateToken");
 
@@ -34,5 +35,6 @@ router.post("/googleAuth", googleAuth);
 router.get("/getuserdata", authenticateToken, getUserProfile);
 router.post("/changeprofilepic", authenticateToken, changeUserProfilePic);
 router.post("/changeusername", authenticateToken, changeUsername);
+router.post("/logout", authenticateToken, logoutUser);
 
 module.exports = router;

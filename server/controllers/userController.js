@@ -244,6 +244,16 @@ const changeUsername = async (req, res) => {
   }
 };
 
+const logoutUser = async (req, res) => {
+  try {
+    res.clearCookie("JWT_Token");
+    return res.status(200).json({ message: "Logged out successfully 😁" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Failed to logout 😵‍💫" });
+  }
+}
+
 module.exports = {
   sendOtp,
   signUp,
@@ -256,4 +266,5 @@ module.exports = {
   getUserProfile,
   changeUserProfilePic,
   changeUsername,
+  logoutUser,
 };

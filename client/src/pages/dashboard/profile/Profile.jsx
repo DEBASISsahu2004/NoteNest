@@ -8,8 +8,11 @@ import { fetchUserData } from '../../../components/userData/userData';
 import { updateProfilePic, updateUsername } from '../../../redux/actions/userActions';
 import { images } from "../../../components/randomprofilepic/randomprofilepic";
 import { UserPen } from 'lucide-react';
+import { logout } from '../../../redux/actions/authActions';
+// import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  // const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.theme);
   const profilePic = useSelector((state) => state.user.profilePic);
   const dispatch = useDispatch();
@@ -105,6 +108,22 @@ const Profile = () => {
     );
   }
 
+  const handleLogout = async () => {
+    try {
+      const response = await api('/users/logout', 'POST');
+      const message = response.data.message;
+      if (response.status === 200) {
+        toast.success(message, { theme: theme === 'dark' ? 'dark' : 'light' });
+        dispatch(logout());
+      } else {
+        toast.error(message, { theme: theme === 'dark' ? 'dark' : 'light' });
+      }
+    } catch (error) {
+      console.error('Error logging out:', error);
+      toast.error('Error logging out, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
+    }
+  }
+
   return (
     <div className={styles.ProfileContainer}>
       <Navbar />
@@ -155,6 +174,7 @@ const Profile = () => {
 
           <div className={styles.actionButtonContainer}>
             <button type="button" className={styles.changePasswordButton}>Change Password</button>
+            <button type="button" onClick={handleLogout} className={styles.logoutButton}>Logout</button>
             <a href="/dashboard" className={styles.dashboardButton}>Back to dashboard</a>
           </div>
         </div>

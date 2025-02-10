@@ -12,9 +12,12 @@ const generateAccessToken = (user, res) => {
     secure: process.env.NODE_ENV !== 'development',
     sameSite: "Strict",
   });
+  console.log("Token stored in cookie");
 };
 
 const verifyAccessToken = (token) => {
+  console.log("Verifying token");
+  console.log("Token: ", token);
   return JWT.verify(token, process.env.JWT_SECRET);
 };
 

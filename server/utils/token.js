@@ -9,8 +9,8 @@ const generateAccessToken = (user, res) => {
   // Storing the token in cookie
   res.cookie("JWT_Token", accessToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: "Strict",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "None",
   });
   console.log("Token stored in cookie");
 };

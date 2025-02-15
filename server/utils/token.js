@@ -10,14 +10,11 @@ const generateAccessToken = (user, res) => {
   res.cookie("JWT_Token", accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "None",
+    sameSite: "Strict",
   });
-  console.log("Token stored in cookie");
 };
 
 const verifyAccessToken = (token) => {
-  console.log("Verifying token");
-  console.log("Token: ", token);
   return JWT.verify(token, process.env.JWT_SECRET);
 };
 

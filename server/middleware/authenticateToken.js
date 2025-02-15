@@ -6,7 +6,6 @@ const authenticateToken = async (req, res, next) => {
 
   // If token is not found, return response with status 403 (Forbidden) and move the user to login page
   if (!token) { 
-    console.log("token not found: ", token);
     return res.status(403).json({ message: "Token not found, Please login" }); 
   }
 
@@ -16,8 +15,6 @@ const authenticateToken = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
-    console.log("Error verifying token: ", err);
-    console.log("Error verifying token: ", token);
     return res.status(403).json({ message: "Error verifying token" });
   }
 }

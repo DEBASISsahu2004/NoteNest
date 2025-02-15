@@ -9,6 +9,7 @@ import { updateProfilePic, updateUsername } from '../../../redux/actions/userAct
 import { images } from "../../../components/randomprofilepic/randomprofilepic";
 import { UserPen } from 'lucide-react';
 import { logout } from '../../../redux/actions/authActions';
+import Input from "../../../components/inputfield/Input";
 // import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -22,6 +23,7 @@ const Profile = () => {
   const [selectedProfilePic, setSelectedProfilePic] = useState('');
   const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [newUsername, setNewUsername] = useState('');
+  const [changePassword, setChangePassword] = useState('');
 
   useEffect(() => {
     const getUserData = async () => {
@@ -124,6 +126,11 @@ const Profile = () => {
     }
   }
 
+  const handleChangePasswordPopUp = () => {
+    setChangePassword('currentPassword');
+    document.querySelector(`.${styles.changepasswordContainer}`).style.display = 'block';
+  };
+
   return (
     <div className={styles.ProfileContainer}>
       <Navbar />
@@ -173,7 +180,7 @@ const Profile = () => {
           </div>
 
           <div className={styles.actionButtonContainer}>
-            <button type="button" className={styles.changePasswordButton}>Change Password</button>
+            <button type="button" onClick={handleChangePasswordPopUp} className={styles.changePasswordButton}>Change Password</button>
             <button type="button" onClick={handleLogout} className={styles.logoutButton}>Logout</button>
             <a href="/dashboard" className={styles.dashboardButton}>Back to dashboard</a>
           </div>
@@ -191,6 +198,34 @@ const Profile = () => {
         </div>
 
       </div>
+
+      <section className={styles.changepasswordContainer}>
+        <h2>Change Password</h2>
+        {changePassword === 'currentPassword' && (
+          <form onSubmit={handleCheckPassword}>
+            <div>
+              <Input label="Current Password" name="password" type="password" placeholder="Enter current password" value={userDetails.password} onChange={handleInputChange} autocomplete="new-password" />
+              {errors.password && <p className={styles.error}>{errors.password}</p>}
+            </div>
+            <button type="submit">Next</button>
+          </form>
+        )}
+
+        {changePassword === 'newPassword' && (
+          <form onSubmit={handleSavePassword}>
+            <div>
+              <Input label="New Password" name="password" type="password" placeholder="Enter more than 4 character" value={userDetails.password} onChange={handleInputChange} autocomplete="new-password" />
+              {errors.password && <p className={styles.error}>{errors.password}</p>}
+            </div>
+
+            <div>
+              <Input label="Confirm Password" name="confirmPassword" type="password" placeholder="Enter more than 4 character" value={userDetails.confirmPassword} onChange={handleInputChange} autocomplete="new-password" />
+              {errors.confirmPassword && <p className={styles.error}>{errors.confirmPassword}</p>}
+            </div>
+            <button type="submit">Save</button>
+          </form>
+        )}
+      </section>
     </div>
   );
 };

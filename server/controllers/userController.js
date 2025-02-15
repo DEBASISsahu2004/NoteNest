@@ -246,7 +246,7 @@ const changeUsername = async (req, res) => {
 
 const logoutUser = async (req, res) => {
   try {
-    res.cookie('JWT_Token', '', { expires: new Date(0), httpOnly: true, sameSite: 'Strict' });
+    res.cookie('JWT_Token', '', { expires: new Date(0), httpOnly: true, sameSite: 'None' });
     console.log("user logout successfully");
     return res.status(200).json({ message: "Logged out successfully 😁" });
   } catch (error) {

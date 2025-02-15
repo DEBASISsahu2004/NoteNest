@@ -17,9 +17,8 @@ const api = async (url, method = "GET", body = null) => {
     const response = await fetch(`${VITE_APP_API_URL}${url}`, options);
 
     if (response.status === 403) {
-      // localStorage.removeItem("isLoggedIn");;
+      localStorage.removeItem("isLoggedIn");
       console.log("403 there is an error while verifing the token");
-      
       return;
     }
 

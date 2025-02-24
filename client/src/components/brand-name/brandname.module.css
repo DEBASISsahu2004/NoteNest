@@ -1,6 +1,5 @@
 .brandNameLarge {
   position: relative;
-  left: -0.3%;
   font-size: clamp(1em, 21.2vw, 133em);
   font-family: "Agbalumo", sans-serif;
   line-height: 0.65;

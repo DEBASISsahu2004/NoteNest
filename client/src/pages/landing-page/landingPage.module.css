@@ -9,51 +9,44 @@
 }
 
 .LandingPage .LandingPageContent {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
   align-items: center;
   gap: 16px;
   margin-top: 40px;
-  transition: all 0.3s ease-in-out;
 }
 
 .LandingPage .LandingPageHeader .heading {
-  text-align: center;
   font-weight: 700;
   line-height: 1;
   font-size: 64px;
   color: var(--text);
-  transition: all 0.3s ease-in-out;
 }
 
 .LandingPage .LandingPageHeader .heading span {
   color: rgb(var(--primary));
 }
 
-.LandingPage .description {
+.LandingPage .LandingPageContent .description {
   text-align: center;
   width: 750px;
   font-size: 18px;
   color: #666;
-  transition: all 0.3s ease-in-out;
 }
 
 .LandingPage .LandingPageContent .callToActionButton {
   padding: 10px 60px;
-  background-color: rgb(var(--primary));
+  background-color: rgb(var(--primary), 1);
   color: white;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 18px;
-  border: 2px solid rgb(var(--primary));
   font-weight: 600;
   transition: all 0.3s ease-in-out;
 }
 
 .LandingPage .LandingPageContent .callToActionButton:hover {
-  background-color: rgba(var(--primary), 0.2);
+  background-color: rgba(var(--primary), 0.5);
   color: var(--text);
-  border: 2px solid rgb(var(--primary));
 }
 
 @media (max-width: 1024px) {
@@ -65,14 +58,14 @@
   .LandingPage .LandingPageHeader .heading {
     font-size: 42px;
   }
-  .LandingPage .description {
+
+  .LandingPage .LandingPageHeader .description {
     width: 500px;
     font-size: 16px;
   }
 
   .LandingPage .LandingPageContent .callToActionButton {
     padding: 8px 40px;
-    border-radius: 6px;
     font-size: 14px;
   }
 }
@@ -80,15 +73,15 @@
 @media (max-width: 566px) {
   .LandingPage .LandingPageContent {
     gap: 12px;
-    margin-top: 32px;
   }
 
   .LandingPage .LandingPageHeader .heading {
     font-size: 32px;
   }
+
   .LandingPage .description {
     width: 370px;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .LandingPage .LandingPageContent .callToActionButton {
@@ -99,7 +92,7 @@
 }
 
 @media (max-width: 375px) {
-  .LandingPage .description {
+  .LandingPage .LandingPageHeader .description {
     width: 350px;
     font-size: 12px;
   }

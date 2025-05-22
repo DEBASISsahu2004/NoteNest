@@ -1,4 +1,4 @@
-# NoteNest
+<!-- # NoteNest
 
 **NoteNest** is a user-friendly note-taking application with a modern dark/light interface. It allows users to type notes with rich text formatting and draw using an integrated whiteboard. Designed to help users organize their thoughts visually and textually, NoteNest offers a seamless and secure experience.
 
@@ -28,4 +28,6 @@
 
 - **Node.js**: Backend runtime environment.
 - **Express.js**: Framework for building RESTful APIs.
-- **MongoDB**: NoSQL database for storing user and note data.
+- **MongoDB**: NoSQL database for storing user and note data. -->
+
+# Note application

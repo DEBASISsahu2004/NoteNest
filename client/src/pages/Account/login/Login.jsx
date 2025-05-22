@@ -17,13 +17,12 @@ import { login } from '../../../redux/actions/authActions';
 const Login = () => {
   const theme = useSelector((state) => state.theme.theme);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [userDetails, setUserDetails] = useState({ email: '', password: '', confirmPassword: '', otp: '' });
   const [formPage, setFormPage] = useState('loginForm');
   const [timer, setTimer] = useState();
   const [errors, setErrors] = useState({});
-
-  const dispatch = useDispatch();
 
   const handleToggleTheme = () => {
     dispatch(toggleTheme());
@@ -48,30 +47,36 @@ const Login = () => {
 
       return () => clearInterval(countdown);
     }
-  }, [formPage, timer]);
+  }, [timer]);
 
+  // Format time function
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
+  // Login function
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+
+    const formButton = e.target.querySelector('button[type="submit"]');
+    formButton.innerText = 'Logging in... ⌛';
+    formButton.disabled = true;
+    formButton.style.cursor = 'not-allowed';
 
     const { email, password } = userDetails;
 
     let validationErrors = {};
-    if (email === '') {
-      validationErrors.email = 'Email cannot be empty';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (email === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       validationErrors.email = 'Please enter a valid email';
     }
 
-    if (password === '' || password.length < 4) {
+    if (password.length < 4) {
       validationErrors.password = 'Password must be at least 4 characters';
     }
 
+    // As the object does not have any property like length to calculate the size, we first convert the object to array using Object.keys() and than use the length function
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -79,20 +84,17 @@ const Login = () => {
 
     setErrors({});
 
-    toast.info('Logging in... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
-
     try {
       const response = await api('/users/login', 'POST', { email, password });
 
+      formButton.innerText = 'Login';
+      formButton.disabled = false;
+      formButton.style.cursor = 'pointer';
+
       if (response.status === 200) {
-        toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
         dispatch(login());
         navigate('/dashboard');
-      } else if (response.status === 400) {
-        console.log(response.data.message);
-        toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
-      }
-      else {
+      } else {
         console.log(response.data.message);
         toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
       }
@@ -104,11 +106,19 @@ const Login = () => {
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
+
+    const formButton = e.target.querySelector('button[type="submit"]');
+    formButton.innerText = 'Sending OTP... ⌛';
+    formButton.disabled = true;
+    formButton.style.cursor = 'not-allowed';
+
     const { email } = userDetails;
 
     let validationErrors = {};
     if (email === '') {
       validationErrors.email = 'Email cannot be empty';
+    }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      validationErrors.email = 'Please enter a valid email';
     }
 
     if (Object.keys(validationErrors).length > 0) {
@@ -118,10 +128,12 @@ const Login = () => {
 
     setErrors({});
 
-    toast.info('Verifying email... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
-
     try {
       const response = await api('/users/verifyemail', 'POST', { email });
+
+      formButton.innerText = 'Send OTP';
+      formButton.disabled = false;
+      formButton.style.cursor = 'pointer';
 
       if (response.status === 200) {
         toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
@@ -139,6 +151,12 @@ const Login = () => {
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
+
+    const formButton = e.target.querySelector('button[type="submit"]');
+    formButton.innerText = 'Verifying OTP... ⌛';
+    formButton.disabled = true;
+    formButton.style.cursor = 'not-allowed';
+
     const { email, otp } = userDetails;
 
     let validationErrors = {};
@@ -152,10 +170,13 @@ const Login = () => {
     }
 
     setErrors({});
-    toast.info('Verifying OTP... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
       const response = await api('/users/verifyotp', 'POST', { email, otp });
+      
+      formButton.innerText = 'Verify OTP';
+      formButton.disabled = false;
+      formButton.style.cursor = 'pointer';
 
       if (response.status === 200) {
         toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
@@ -172,10 +193,16 @@ const Login = () => {
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
+
+    const formButton = e.target.querySelector('button[type="submit"]');
+    formButton.innerText = 'Resetting Password... ⌛';
+    formButton.disabled = true;
+    formButton.style.cursor = 'not-allowed';
+
     const { email, password, confirmPassword } = userDetails;
 
     let validationErrors = {};
-    if (password === '' || password.length < 4) {
+    if (password.length < 4) {
       validationErrors.password = 'Password must be at least 4 characters';
     }
 
@@ -198,14 +225,15 @@ const Login = () => {
 
     try {
       const response = await api('/users/resetpassword', 'POST', { email, password });
+      
+      formButton.innerText = 'Reset';
+      formButton.disabled = false;
+      formButton.style.cursor = 'pointer';
 
       if (response.status === 200) {
         toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
         setUserDetails((prevDetails) => ({ ...prevDetails, email: '', password: '', confirmPassword: '', otp: '' }));
         setFormPage('loginForm');
-      } else if (response.status === 400) {
-        console.log(response.data.message);
-        toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
       } else {
         console.log(response.data.message);
         toast.error(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });

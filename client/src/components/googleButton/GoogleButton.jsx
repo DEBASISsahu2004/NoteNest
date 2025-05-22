@@ -23,25 +23,24 @@ const GoogleButton = () => {
 
     const fetchUserData = async (accessToken) => {
         try {
-            toast.info('Fetching data... 🔍', { theme: theme === 'dark' ? 'dark' : 'light' });
             const googleResponse = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
+
             if (!googleResponse.ok) {
                 throw new Error(`HTTP error! status: ${googleResponse.status}`);
             }
             const googleData = await googleResponse.json();
 
-            toast.info('Trying to login, This might take some time ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
+            toast.info('Logging in... this might take some time ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
             const profilepic = getRandomProfilePic();
 
             const response = await api('/users/googleAuth', 'POST', { email: googleData.email, name: googleData.given_name, profilepic });
 
             if (response.status === 200) {
-                toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
                 dispatch(login());
                 navigate('/dashboard');
             } else {

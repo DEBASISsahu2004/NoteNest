@@ -1,4 +1,4 @@
-const api = async (url, method = "GET", body = null) => {
+const api = async (url, method = "GET", body = null, handleLogout = null) => {
   const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 
   try {
@@ -16,9 +16,9 @@ const api = async (url, method = "GET", body = null) => {
 
     const response = await fetch(`${VITE_APP_API_URL}${url}`, options);
 
-    if (response.status === 403) {
-      localStorage.removeItem("isLoggedIn");
-      console.log("403 there is an error while verifing the token");
+    if (response.status === 403 && handleLogout) {
+      handleLogout();
+      console.log("User token not found, Please login again");
       return;
     }
 

@@ -118,7 +118,7 @@ const login = async (req, res) => {
     }
 
     await generateAccessToken(user, res);
-
+    
     return res.status(200).json({ message: "Successfully logged in 😁" });
   } catch (error) {
     console.error(error);
@@ -199,7 +199,11 @@ const getUserProfile = async (req, res) => {
     const user = await User.findById(req.user.id).select("-password");
     const notes = await Note.find({ user: req.user.id });
 
-    return res.status(200).json({ user, notes });
+    if (user) {
+      return res.status(200).json({ user, notes });
+    } else {
+      res.status(403).json({ message: "User not found 🧐" });
+    }
   } catch (error) {
     console.error(error);
     return res
@@ -246,14 +250,37 @@ const changeUsername = async (req, res) => {
 
 const logoutUser = async (req, res) => {
   try {
-    res.cookie('JWT_Token', '', { expires: new Date(0), httpOnly: true, sameSite: 'None' });
+    res.cookie("JWT_Token", "", {
+      expires: new Date(0),
+      httpOnly: true,
+      sameSite: "Strict",
+    });
     console.log("user logout successfully");
     return res.status(200).json({ message: "Logged out successfully 😁" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Failed to logout 😵‍💫" });
   }
-}
+};
+
+const checkChangePassword = async (req, res) => {
+  try {
+    const { password } = req.body;
+    const user = await User.findById(req.user.id);
+
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: "Incorrect password 🧐" });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "Password verified successfully 😁" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error verifying password 😵‍💫" });
+  }
+};
 
 module.exports = {
   sendOtp,
@@ -268,4 +295,5 @@ module.exports = {
   changeUserProfilePic,
   changeUsername,
   logoutUser,
+  checkChangePassword,
 };

@@ -1,0 +1,213 @@
+.dashboardContainer {
+  position: relative;
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboardContainer .dashboardContent {
+  flex: 1;
+  display: flex;
+  /* height: calc(
+    100dvh - 60px
+  );  */
+  /* Adjust 60px if your Navbar is a different height */
+  min-height: 0;
+}
+
+.dashboardContainer .sidebar {
+  position: relative;
+  width: 300px;
+  height: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  border-right: 2px solid var(--text);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.dashboardContainer .sidebar .sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid var(--text);
+}
+
+.dashboardContainer .sidebar .newNoteButton,
+.dashboardContainer .sidebar .toggleSidebarButton,
+.dashboardContainer .sidebar .searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text);
+}
+
+.dashboardContainer .sidebar .newNoteIcon,
+.dashboardContainer .sidebar .toggleSidebatIcon,
+.dashboardContainer .sidebar .searchIcon {
+  width: 24px;
+  height: 24px;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  border: 4px solid transparent;
+  /* This visually shrinks the thumb inside the track */
+  background-clip: padding-box;
+}
+
+.dashboardContainer .sidebar .dashboardTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text);
+}
+
+/* Search bar */
+.dashboardContainer .sidebar .searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 2px solid var(--text);
+}
+
+.dashboardContainer .sidebar .searchInput {
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+}
+
+.dashboardContainer .sidebar .notesContainer {
+  position: relative;
+  /* Take up the remaining space */
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* Prevent flexbox children from growing beyond the container */
+  min-height: 0;
+}
+
+.dashboardContainer .sidebar .noNotesMessage {
+  /* color: var(--secondary); */
+  color: #666;
+  text-align: center;
+  margin: auto;
+}
+
+.dashboardContainer .sidebar .note {
+  position: relative;
+  background: var(--secondary);
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.dashboardContainer .sidebar .noteTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 70%;
+}
+
+.dashboardContainer .sidebar .noteContent {
+  font-size: 14px;
+  color: var(--text-secondary, #aaa);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboardContainer .sidebar .deleteIcon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: var(--danger);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dashboardContainer .sidebar .deleteIcon:hover {
+  opacity: 1;
+}
+
+/* Logout button */
+.dashboardContainer .sidebar .logoutButton {
+  margin: 20px 10px;
+  padding: 10px 0;
+  background-color: var(--danger);
+  color: white;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  opacity: 0.7;
+}
+
+.dashboardContainer .sidebar .logoutButton:hover {
+  opacity: 1;
+}
+
+/* Main content area */
+.dashboardContainer .mainContent {
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.dashboardContainer .mainContent::-webkit-scrollbar{
+  display: none;
+}
+
+
+.dashboardContainer .mainContent .mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid var(--text);
+  position: relative;
+}
+
+.dashboardContainer .mainContent .mainHeader .toggleSidebarButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  display: flex;
+  color: var(--text);
+}
+
+.dashboardContainer .mainContent .mainHeader .noteTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text);
+  margin: auto;
+}
+

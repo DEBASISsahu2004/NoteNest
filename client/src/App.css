@@ -6,11 +6,14 @@
 
   --dark-primary: 30, 144, 255;
   --light-primary: 255, 87, 34;
-  --dark-secondary: 26, 25, 25;
-  --light-secondary: 226, 226, 226;
+  --dark-secondary: #232323;
+  --light-secondary: #f5f5f5;
+  /* --light-secondary: 226, 226, 226; */
 
   --bg: #000;
   --text: #ffffff;
+
+  --danger: #c0392b;
 }
 
 * {

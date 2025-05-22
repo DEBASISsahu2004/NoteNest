@@ -10,27 +10,32 @@ import { images } from "../../../components/randomprofilepic/randomprofilepic";
 import { UserPen } from 'lucide-react';
 import { logout } from '../../../redux/actions/authActions';
 import Input from "../../../components/inputfield/Input";
-// import { useNavigate } from 'react-router-dom';
+import useLogout from "../../../components/userData/useLogout";
 
 const Profile = () => {
-  // const navigate = useNavigate();
   const theme = useSelector((state) => state.theme.theme);
   const profilePic = useSelector((state) => state.user.profilePic);
   const dispatch = useDispatch();
-
+  const handleLogout = useLogout();
+  
   const [userData, setUserData] = useState({});
   const [userNoteData, setUserNoteData] = useState([]);
+  
   const [selectedProfilePic, setSelectedProfilePic] = useState('');
   const [isEditingUsername, setIsEditingUsername] = useState(false);
   const [newUsername, setNewUsername] = useState('');
-  const [changePassword, setChangePassword] = useState('');
+  const [changePassword, setChangePassword] = useState(false);
 
   useEffect(() => {
     const getUserData = async () => {
-      const data = await fetchUserData(theme);
+      const data = await fetchUserData();
+      console.log('got data');
       if (data) {
+        console.log('this is data: ', data);
         setUserData(data.userData);
         setUserNoteData(data.userNoteData);
+      } else {
+        dispatch(logout());
       }
     };
     getUserData();
@@ -47,7 +52,7 @@ const Profile = () => {
   const handleSavePic = async () => {
     document.querySelector(`.${styles.selectProfilePic}`).style.display = 'none';
     try {
-      const response = await api('/users/changeprofilepic', 'POST', { profilepic: selectedProfilePic });
+      const response = await api('/users/changeprofilepic', 'POST', { profilepic: selectedProfilePic }, handleLogout);
       const message = response.data.message;
       if (response.status === 200) {
         toast.success(message, { theme: theme === 'dark' ? 'dark' : 'light' });
@@ -77,7 +82,7 @@ const Profile = () => {
 
   const handleSaveUsername = async () => {
     try {
-      const response = await api('/users/changeusername', 'POST', { username: newUsername });
+      const response = await api('/users/changeusername', 'POST', { username: newUsername }, handleLogout);
       const message = response.data.message;
 
       console.log(message);
@@ -110,26 +115,25 @@ const Profile = () => {
     );
   }
 
-  const handleLogout = async () => {
+  const handleCurrentPassword = async (e) => {
+    e.preventDefault();
+    console.log(e.target.currentpassword.value);
+
     try {
-      const response = await api('/users/logout', 'POST');
+      const response = await api('/users/checkpassword', 'POST', { password: e.target.currentpassword.value }, handleLogout);
       const message = response.data.message;
       if (response.status === 200) {
         toast.success(message, { theme: theme === 'dark' ? 'dark' : 'light' });
-        dispatch(logout());
+        console.log('Password correct');
       } else {
         toast.error(message, { theme: theme === 'dark' ? 'dark' : 'light' });
+        console.log('Password incorrect');
       }
     } catch (error) {
-      console.error('Error logging out:', error);
-      toast.error('Error logging out, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
+      console.error('Error checking password:', error);
+      toast.error('Error checking password, try again 😵‍💫', { theme: theme === 'dark' ? 'dark' : 'light' });
     }
   }
-
-  const handleChangePasswordPopUp = () => {
-    setChangePassword('currentPassword');
-    document.querySelector(`.${styles.changepasswordContainer}`).style.display = 'block';
-  };
 
   return (
     <div className={styles.ProfileContainer}>
@@ -180,9 +184,11 @@ const Profile = () => {
           </div>
 
           <div className={styles.actionButtonContainer}>
-            <button type="button" onClick={handleChangePasswordPopUp} className={styles.changePasswordButton}>Change Password</button>
-            <button type="button" onClick={handleLogout} className={styles.logoutButton}>Logout</button>
+            <button type="button" onClick={() => {
+              setChangePassword(true);
+            }} className={styles.changePasswordButton}>Change Password</button>
             <a href="/dashboard" className={styles.dashboardButton}>Back to dashboard</a>
+            <button type="button" onClick={handleLogout} className={styles.logoutButton}>Logout</button>
           </div>
         </div>
 
@@ -199,33 +205,26 @@ const Profile = () => {
 
       </div>
 
-      <section className={styles.changepasswordContainer}>
-        <h2>Change Password</h2>
-        {changePassword === 'currentPassword' && (
-          <form onSubmit={handleCheckPassword}>
-            <div>
-              <Input label="Current Password" name="password" type="password" placeholder="Enter current password" value={userDetails.password} onChange={handleInputChange} autocomplete="new-password" />
-              {errors.password && <p className={styles.error}>{errors.password}</p>}
-            </div>
-            <button type="submit">Next</button>
-          </form>
-        )}
 
-        {changePassword === 'newPassword' && (
-          <form onSubmit={handleSavePassword}>
-            <div>
-              <Input label="New Password" name="password" type="password" placeholder="Enter more than 4 character" value={userDetails.password} onChange={handleInputChange} autocomplete="new-password" />
-              {errors.password && <p className={styles.error}>{errors.password}</p>}
-            </div>
+      {changePassword && (
+        <section className={styles.changePasswordSection}>
+          <div className={styles.FormContainer}>
+            <h1 className={styles.title}>Change Password</h1>
 
-            <div>
-              <Input label="Confirm Password" name="confirmPassword" type="password" placeholder="Enter more than 4 character" value={userDetails.confirmPassword} onChange={handleInputChange} autocomplete="new-password" />
-              {errors.confirmPassword && <p className={styles.error}>{errors.confirmPassword}</p>}
-            </div>
-            <button type="submit">Save</button>
-          </form>
-        )}
-      </section>
+            <form className={styles.currentPasswordForm} onSubmit={handleCurrentPassword}>
+              <Input name="currentpassword" type="password" placeholder="Enter Current Password" />
+              <div className={styles.buttonContainer}>
+                <button type="button" className={styles.cancelButton} onClick={() => {
+                  setChangePassword(false);
+                }}>Cancel</button>
+                <button type="submit" className={styles.saveButton}>Next</button>
+              </div>
+            </form>
+
+
+          </div>
+        </section>
+      )}
     </div>
   );
 };

@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: padding 0.3s ease-in-out;
   border-bottom: 2px solid var(--text);
 }
 
@@ -13,13 +12,12 @@
   display: flex;
   align-items: center;
   gap: 40px;
-  transition: gap 0.3s ease-in-out;
 }
 
 .navContainer .aboutContainer .logo {
   width: 50px;
   aspect-ratio: 1/1;
-  transition: all 0.3s ease-in-out;
+  user-select: none;
 }
 
 .navContainer .aboutContainer .aboutDropdown {
@@ -54,6 +52,15 @@
   gap: 10px;
 }
 
+.navContainer .aboutContainer .aboutButton.active {
+  background-color: rgb(var(--secondary));
+  border-radius: 8px 8px 0 0;
+}
+
+.navContainer .aboutContainer .aboutContent.active {
+  display: flex;
+}
+
 .navContainer .aboutContainer .aboutContent p span {
   font-weight: 600;
 }
@@ -63,7 +70,6 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  transition: gap 0.3s ease-in-out;
 }
 
 .navContainer .authButtonContainer .authButton:hover {
@@ -99,7 +105,7 @@
   background-color: rgb(var(--secondary));
   border: 2px solid var(--text);
   border-radius: 8px;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;

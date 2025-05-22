@@ -30,10 +30,10 @@ const Input = ({ label, name, type, placeholder, value, onChange }) => {
 }
 
 Input.propTypes = {
-    label: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    placeholder: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    placeholder: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
 }

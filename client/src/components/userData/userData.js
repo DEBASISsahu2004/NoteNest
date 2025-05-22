@@ -1,9 +1,9 @@
 import api from "../../components/apis/api";
-import { toast } from "react-toastify";
+import useLogout from "./useLogout";
 
-const fetchUserData = async (theme) => {
+const fetchUserData = async () => {
   try {
-    const response = await api("/users/getuserdata", "GET");
+    const response = await api("/users/getuserdata", "GET", useLogout);
 
     if (response.status === 200) {
       const userData = response.data.user;
@@ -14,9 +14,6 @@ const fetchUserData = async (theme) => {
     }
   } catch (error) {
     console.log("Error fetching user data:", error);
-    toast.error("Error fetching user data, try again 😵‍💫", {
-      theme: theme === "dark" ? "dark" : "light",
-    });
   }
 };
 

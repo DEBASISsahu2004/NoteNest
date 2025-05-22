@@ -18,7 +18,7 @@ const sendOtpEmail = async (to, otp) => {
       <div style="font-family: Arial, sans-serif; text-align: center;">
         <h2>Your OTP Code</h2>
         <p>Please use the following OTP code to complete your verification:</p>
-        <h1 style="color: #4CAF50;">${otp}</h1>
+        <h1 style="color:rgb(0, 128, 255);">${otp}</h1>
         <p>This code is valid for 5 minutes.</p>
         <p>If you did not request this code, please ignore this email.</p>
       </div>

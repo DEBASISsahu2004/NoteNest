@@ -12,6 +12,7 @@ const {
   changeUserProfilePic,
   changeUsername,
   logoutUser,
+  checkChangePassword,
 } = require("../controllers/userController");
 const authenticateToken = require("../middleware/authenticateToken");
 
@@ -36,5 +37,7 @@ router.get("/getuserdata", authenticateToken, getUserProfile);
 router.post("/changeprofilepic", authenticateToken, changeUserProfilePic);
 router.post("/changeusername", authenticateToken, changeUsername);
 router.post("/logout", authenticateToken, logoutUser);
+
+router.post("/checkpassword", authenticateToken, checkChangePassword);
 
 module.exports = router;

@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { Sun, Moon } from 'lucide-react';
+
 import Logodark from "../../../assets/images/logo-dark.svg";
 import Logolight from "../../../assets/images/logo-light.svg";
 import Input from "../../../components/inputfield/Input";
@@ -49,7 +49,7 @@ const SignUp = () => {
 
       return () => clearInterval(countdown);
     }
-  }, [formPage, timer]);
+  }, [timer]);
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -59,6 +59,12 @@ const SignUp = () => {
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
+
+    const formButton = e.target.querySelector('button[type="submit"]'); 
+    formButton.disabled = true;
+    formButton.innerText = 'Sending OTP...';
+    formButton.style.cursor = 'not-allowed';
+
     const { email } = userDetails;
 
     let validationErrors = {};
@@ -75,10 +81,12 @@ const SignUp = () => {
 
     setErrors({});
 
-    toast.info('Verifying email... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
-
     try {
       const response = await api('/users/sendotp', 'POST', { email });
+
+      formButton.disabled = false;
+      formButton.innerHTML = 'Verify';
+      formButton.style.cursor = 'pointer';
 
       if (response.status === 200) {
         toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
@@ -96,6 +104,12 @@ const SignUp = () => {
 
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
+
+    const formButton = document.querySelector('button[type="submit"]');
+    formButton.disabled = true;
+    formButton.innerText = 'Verifying... ⌛';
+    formButton.style.cursor = 'not-allowed';
+
     const { email, otp } = userDetails;
 
     let validationErrors = {};
@@ -109,10 +123,13 @@ const SignUp = () => {
     }
 
     setErrors({});
-    toast.info('Verifying OTP... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
       const response = await api('/users/verifyotp', 'POST', { email, otp });
+
+      formButton.disabled = false;
+      formButton.innerHTML = 'Next';
+      formButton.style.cursor = 'pointer';
 
       if (response.status === 200) {
         toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
@@ -129,6 +146,12 @@ const SignUp = () => {
 
   const handleCredSubmit = async (e) => {
     e.preventDefault();
+
+    const formButton = document.querySelector('button[type="submit"]');
+    formButton.disabled = true;
+    formButton.innerText = 'Creating...';
+    formButton.style.cursor = 'not-allowed';
+
     const { username, email, password, confirmPassword } = userDetails;
 
     let validationErrors = {};
@@ -136,11 +159,11 @@ const SignUp = () => {
       validationErrors.username = 'Username is required';
     }
 
-    if (password === '' || password.length < 4) {
+    if (password.length < 4) {
       validationErrors.password = 'Password must be at least 4 characters';
     }
 
-    if (confirmPassword === '' || confirmPassword.length < 4) {
+    if (confirmPassword.length < 4) {
       validationErrors.confirmPassword = 'Password must be at least 4 characters';
     }
 
@@ -155,14 +178,16 @@ const SignUp = () => {
     }
 
     setErrors({});
-    toast.info('Creating account... ⌛', { theme: theme === 'dark' ? 'dark' : 'light' });
 
     try {
       const profilepic = await getRandomProfilePic();
       const response = await api('/users/signup', 'POST', { username, email, password, profilepic });
 
+      formButton.disabled = false;
+      formButton.innerHTML = 'Submit';
+      formButton.style.cursor = 'pointer';
+
       if (response.status === 200) {
-        toast.success(response.data.message, { theme: theme === 'dark' ? 'dark' : 'light' });
         dispatch(login());
         navigate('/dashboard');
       } else {
